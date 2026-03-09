@@ -42,9 +42,10 @@ export function Footer() {
           <div className="footer-col-title">Navigate</div>
           <ul className="footer-links">
             <li><a href="#services">Services</a></li>
+            <li><a href="#clients">Clients</a></li>
             <li><a href="#blueprints">Blueprints</a></li>
-            <li><a href="#purpose">Purpose</a></li>
             <li><a href="#insights">Insights</a></li>
+            <li><a href="#purpose">Purpose</a></li>
           </ul>
         </div>
 

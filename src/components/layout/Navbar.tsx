@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 function lerp(a: number, b: number, t: number): number {
   return Math.round(a + (b - a) * t);
@@ -63,7 +64,7 @@ export function Navbar() {
 
   return (
     <nav className="navbar" id="navbar" ref={navRef}>
-      <div className="logo-wrap">
+      <Link href="/" className="logo-wrap" style={{ textDecoration: 'none' }}>
         <Image
           src="/images/logo/logo-symbol-dark.png"
           alt="Digixr"
@@ -75,12 +76,13 @@ export function Navbar() {
           <div className="logo-text">DIGIXR</div>
           <div className="logo-sub">TECHNOLOGIES</div>
         </div>
-      </div>
+      </Link>
       <ul className="nav-links">
         <li><a href="#services">Services</a></li>
+        <li><a href="#clients">Clients</a></li>
         <li><a href="#blueprints">Blueprints</a></li>
-        <li><a href="#purpose">Purpose</a></li>
         <li><a href="#insights">Insights</a></li>
+        <li><a href="#purpose">Purpose</a></li>
         <li>
           <a
             href="#cta"
