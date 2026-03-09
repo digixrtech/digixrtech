@@ -8,16 +8,18 @@ This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEAR
 
 ### Completed
 - [x] Step 0: CLAUDE.md, Next.js 15 scaffold, folder structure, dependencies
-- [x] Step 1 (partial): Layout shell — Navbar.tsx, Footer.tsx, globals.css, fonts wired
-- [x] page.tsx has placeholder sections (not real components)
+- [x] Step 1: Layout shell — Navbar, Footer, globals.css, fonts, `.claude/rules/components.md`
 
 ### Not Started
-- [ ] All section components (Hero → Discovery)
-- [ ] Canvas animations (agent-network, ripple-field)
-- [ ] Chat widget
-- [ ] Secondary pages (insights, blueprint demos)
-- [ ] Scroll transitions + polish
-- [ ] Deployment
+- [ ] Step 2: Hero Section + Agent Network Canvas
+- [ ] Step 3: Services Section
+- [ ] Step 4: Clients + Blueprints Section
+- [ ] Step 5: Purpose Section + Ripple Field Canvas
+- [ ] Step 6: Insights Teaser + Discovery Section
+- [ ] Step 7: Chat Widget
+- [ ] Step 8: Scroll Transitions + Polish
+- [ ] Step 9: Secondary Pages
+- [ ] Step 10: Deploy
 
 ---
 
@@ -35,7 +37,7 @@ This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEAR
 
 ## Step 1: Complete Layout Shell
 
-**Status:** In progress
+**Status:** Complete
 **Sessions:** ~1
 
 **Build:**
@@ -242,7 +244,7 @@ This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEAR
 ## Claude Code Setup Checklist
 
 ### Rules (create during build)
-- [ ] `.claude/rules/components.md` — component conventions (Step 1)
+- [x] `.claude/rules/components.md` — component conventions (Step 1)
 - [ ] `.claude/rules/canvas.md` — canvas animation conventions (Step 5)
 - [ ] `.claude/rules/api.md` — API/security conventions (Step 7)
 
