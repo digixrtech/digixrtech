@@ -587,8 +587,8 @@
     .belief-section > * { max-width: 1280px; margin-left: auto; margin-right: auto; }
     .belief-section::before {
       content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      width: 700px; height: 400px; border-radius: 50%;
-      background: radial-gradient(ellipse, rgba(255,255,255,0.02) 0%, transparent 70%);
+      width: 800px; height: 450px; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,255,255,0.03) 0%, transparent 70%);
       pointer-events: none;
     }
     .belief-section::after {
@@ -603,13 +603,13 @@
     }
     .elixir-visual {
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      position: relative; min-height: 420px;
+      position: relative; min-height: 520px;
     }
-    #elixirCanvas { display: block; width: 100%; height: 340px; }
+    #elixirCanvas { display: block; width: 100%; height: 440px; }
     .elixir-quote {
-      font-size: 18px; font-weight: 400; letter-spacing: 0.01em;
+      font-size: 20px; font-weight: 400; letter-spacing: 0.01em;
       text-align: center; margin-top: 28px; line-height: 1.6;
-      font-style: italic; color: rgba(255,255,255,0.35);
+      font-style: italic; color: rgba(255,255,255,0.55);
       animation: titleGlow 4s ease-in-out infinite;
     }
     .elixir-quote em {
@@ -656,6 +656,10 @@
     .cta-section {
       position: relative; padding: 0 64px 120px; text-align: center;
       max-width: 900px; margin: 0 auto;
+      background: linear-gradient(180deg,
+        rgba(10,10,18,1) 0%,
+        rgba(12,13,22,1) 50%,
+        rgba(10,10,18,1) 100%);
     }
     .cta-section::before {
       content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -876,7 +880,12 @@
 
     /* ─── Insights teaser section ─── */
     .insights-teaser {
-      position: relative; padding: 100px 64px 80px; background: #0a0a12;
+      position: relative; padding: 100px 64px 80px;
+      background: linear-gradient(180deg,
+        rgba(10,10,18,1) 0%,
+        rgba(14,16,26,1) 15%,
+        rgba(14,16,26,1) 85%,
+        rgba(10,10,18,1) 100%);
     }
     .insights-teaser > * { max-width: 1280px; margin-left: auto; margin-right: auto; }
     .insights-teaser::before {
@@ -1000,6 +1009,12 @@
       background: var(--dark-bg);
       text-align: center;
     }
+    .clients-section::after {
+      content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 600px; height: 300px; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(var(--teal-rgb),0.03) 0%, transparent 60%);
+      pointer-events: none;
+    }
     .clients-section::before {
       content: '';
       position: absolute;
@@ -1111,9 +1126,9 @@
       .blueprint-viz { min-height: 280px; }
       .belief-blocks { gap: 32px; }
       .purpose-layout { grid-template-columns: 1fr; gap: 48px; }
-      .elixir-visual { min-height: 280px; }
-      .elixir-quote { font-size: 15px; }
-      #elixirCanvas { height: 280px; }
+      .elixir-visual { min-height: 360px; }
+      .elixir-quote { font-size: 17px; }
+      #elixirCanvas { height: 360px; }
       .insights-grid { grid-template-columns: 1fr; }
       .clients-logo-grid { gap: 32px; }
       .client-logo-card { width: 160px; height: 90px; padding: 12px 20px 10px; }
@@ -1184,13 +1199,13 @@
 
   <!-- ═══ Navbar ═══ -->
   <nav class="navbar" id="navbar">
-    <div class="logo-wrap">
+    <a href="/" class="logo-wrap" style="text-decoration:none;">
       <img src="../image/logo/logo-symbol-dark.png" alt="Digixr" class="logo-icon">
       <div><div class="logo-text">DIGIXR</div><div class="logo-sub">TECHNOLOGIES</div></div>
-    </div>
+    </a>
     <ul class="nav-links">
-      <li><a href="#services">Services</a></li><li><a href="#blueprints">Blueprints</a></li>
-      <li><a href="#purpose">Purpose</a></li><li><a href="#insights">Insights</a></li><li><a href="#clients">Clients</a></li>
+      <li><a href="#services">Services</a></li><li><a href="#clients">Clients</a></li><li><a href="#blueprints">Blueprints</a></li>
+      <li><a href="#insights">Insights</a></li><li><a href="#purpose">Purpose</a></li>
       <li><a href="#cta" class="nav-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'}); return false;">Challenge Us</a></li>
     </ul>
   </nav>
@@ -1291,7 +1306,7 @@
               <div class="offering-items">
                 <span class="tech-tag">RAG Pipeline Design</span>
                 <span class="tech-tag">Knowledge Graph Architecture</span>
-                <span class="tech-tag">Retrieval Strategy</span>
+                <span class="tech-tag">Agentic RAG / Multi-hop Retrieval</span>
                 <span class="tech-tag">Chunking & Embedding Optimization</span>
               </div>
             </div>
@@ -1352,6 +1367,7 @@
                 <span class="tech-tag">API & Database Connectors</span>
                 <span class="tech-tag">CRM & ERP Integration</span>
                 <span class="tech-tag">External Tool Binding</span>
+                <span class="tech-tag">A2A Agent Communication</span>
               </div>
             </div>
           </div>
@@ -1489,13 +1505,13 @@
           </div>
           <div class="offering" data-highlight="xai">
             <div class="offering-header" onclick="toggleOffering(this)">
-              <span class="offering-name"><span class="offering-dot"></span> Explainable AI</span>
+              <span class="offering-name"><span class="offering-dot"></span> Agent Interpretability</span>
               <svg class="offering-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
             </div>
             <div class="offering-body">
               <div class="offering-items">
-                <span class="tech-tag">SHAP</span>
-                <span class="tech-tag">LIME</span>
+                <span class="tech-tag">Agent Trajectory Analysis</span>
+                <span class="tech-tag">Tool Use Attribution</span>
                 <span class="tech-tag">Attention Visualization</span>
                 <span class="tech-tag">Decision Audit Trails</span>
               </div>
@@ -1521,7 +1537,40 @@
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       Section 2: Solution Blueprints (Tabbed)
+       Section 2: Clients
+       ═══════════════════════════════════════════════════════════════ -->
+  <section class="clients-section" id="clients">
+    <div class="section-header reveal">
+      <div class="section-label">Trusted By</div>
+      <h2 class="section-title">Companies that <span class="gradient">trust us.</span></h2>
+      <p class="section-subtitle">From healthcare to fintech — delivering AI-powered solutions across industries.</p>
+    </div>
+    <div class="clients-logo-grid reveal">
+      <a href="https://timesmart.ai/" target="_blank" rel="noopener noreferrer" class="client-logo-card">
+        <img src="../image/clients/timesmart.png" alt="TimeSmart.AI" style="transform: scale(2.2);" />
+        <span class="client-industry">Healthcare SaaS</span>
+      </a>
+      <a href="https://smoor.in/" target="_blank" rel="noopener noreferrer" class="client-logo-card">
+        <img src="../image/clients/smoor.png" alt="SMOOR" />
+        <span class="client-industry">Manufacturing</span>
+      </a>
+      <a href="https://www.hapicare.com/" target="_blank" rel="noopener noreferrer" class="client-logo-card">
+        <img src="../image/clients/hapicare.png" alt="Hapicare" />
+        <span class="client-industry">Healthcare SaaS</span>
+      </a>
+      <a href="https://ibacart.com/" target="_blank" rel="noopener noreferrer" class="client-logo-card">
+        <img src="../image/clients/iba.png" alt="IBA Collections" />
+        <span class="client-industry">Retail</span>
+      </a>
+      <a href="https://www.seedflex.com/" target="_blank" rel="noopener noreferrer" class="client-logo-card">
+        <img src="../image/clients/seedflex.png" alt="SeedFlex" />
+        <span class="client-industry">FinTech</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       Section 3: Solution Blueprints (Tabbed)
        ═══════════════════════════════════════════════════════════════ -->
   <section class="blueprints-section" id="blueprints">
     <div class="section-header reveal">
@@ -1735,46 +1784,6 @@
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       Section 3: Purpose
-       ═══════════════════════════════════════════════════════════════ -->
-  <section class="belief-section" id="purpose">
-    <div class="section-header reveal">
-      <div class="section-label">Our Purpose</div>
-      <h2 class="section-title">Digixr. <span class="gradient"><em>Digital Elixir.</em></span></h2>
-      <p class="section-subtitle">We believe AI should be a transformative, healing force — built right, and equitable to all.</p>
-    </div>
-
-    <div class="purpose-layout">
-      <!-- Left: Elixir Core Canvas -->
-      <div class="elixir-visual reveal">
-        <canvas id="elixirCanvas"></canvas>
-        <div class="elixir-quote">AI must be a transformative, healing force, <em>equitable to all.</em></div>
-      </div>
-
-      <!-- Right: Vision / Mission / Intent -->
-      <div class="belief-blocks">
-        <div class="belief-block reveal" data-belief="vision">
-          <span class="belief-label">Our Vision</span>
-          <p class="belief-text belief-headline">A <span class="belief-highlight">Digital Elixir</span> for all.</p>
-          <p class="belief-text">We envision a world where AI solves humanity's open challenges — not just the profitable ones. From transforming how businesses operate in the new AI era to ensuring that <span class="belief-highlight">the impact of AI is equitable to all</span> — not exclusive to a privileged few.</p>
-        </div>
-
-        <div class="belief-block reveal" data-belief="mission">
-          <span class="belief-label">Our Mission</span>
-          <p class="belief-text belief-headline">Build safe. Build trusted. Build right.</p>
-          <p class="belief-text">Every agent we ship goes through Context, Build, Secure, and Assure — because cutting corners on AI isn't just bad engineering, it's irresponsible. We build safe, trusted AI with <span class="belief-highlight">engineering excellence</span> at every stage.</p>
-        </div>
-
-        <div class="belief-block reveal" data-belief="intent">
-          <span class="belief-label">Our Intent</span>
-          <p class="belief-text belief-headline">Why we started Digixr.</p>
-          <p class="belief-text">AI as a healing, transformative force. We exist to solve humanity's open challenges and ensure the benefits of AI reach everyone. Wherever there's a problem worth solving, we want AI there — built right, and <span class="belief-highlight">accessible to all.</span></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════════════
        Section 4: Insights Teaser
        ═══════════════════════════════════════════════════════════════ -->
   <section class="insights-teaser" id="insights">
@@ -1813,35 +1822,42 @@
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       Section 5: Clients
+       Section 5: Purpose
        ═══════════════════════════════════════════════════════════════ -->
-  <section class="clients-section" id="clients">
+  <section class="belief-section" id="purpose">
     <div class="section-header reveal">
-      <div class="section-label">Trusted By</div>
-      <h2 class="section-title">Companies that <span class="gradient">trust us.</span></h2>
-      <p class="section-subtitle">From healthcare to fintech — delivering AI-powered solutions across industries.</p>
+      <div class="section-label">Our Purpose</div>
+      <h2 class="section-title">Digixr. <span class="gradient"><em>Digital Elixir.</em></span></h2>
+      <p class="section-subtitle">We believe AI should be a transformative, healing force — built right, and equitable to all.</p>
     </div>
-    <div class="clients-logo-grid reveal">
-      <a href="https://timesmart.ai/" target="_blank" rel="noopener noreferrer" class="client-logo-card">
-        <img src="../image/clients/timesmart.png" alt="TimeSmart.AI" style="transform: scale(2.2);" />
-        <span class="client-industry">Healthcare SaaS</span>
-      </a>
-      <a href="https://smoor.in/" target="_blank" rel="noopener noreferrer" class="client-logo-card">
-        <img src="../image/clients/smoor.png" alt="SMOOR" />
-        <span class="client-industry">Manufacturing</span>
-      </a>
-      <a href="https://www.hapicare.com/" target="_blank" rel="noopener noreferrer" class="client-logo-card">
-        <img src="../image/clients/hapicare.png" alt="Hapicare" />
-        <span class="client-industry">Healthcare SaaS</span>
-      </a>
-      <a href="https://ibacart.com/" target="_blank" rel="noopener noreferrer" class="client-logo-card">
-        <img src="../image/clients/iba.png" alt="IBA Collections" />
-        <span class="client-industry">Retail</span>
-      </a>
-      <a href="https://www.seedflex.com/" target="_blank" rel="noopener noreferrer" class="client-logo-card">
-        <img src="../image/clients/seedflex.png" alt="SeedFlex" />
-        <span class="client-industry">FinTech</span>
-      </a>
+
+    <div class="purpose-layout">
+      <!-- Left: Elixir Core Canvas -->
+      <div class="elixir-visual reveal">
+        <canvas id="elixirCanvas"></canvas>
+        <div class="elixir-quote">AI must be a transformative, healing force, <em>equitable to all.</em></div>
+      </div>
+
+      <!-- Right: Vision / Mission / Intent -->
+      <div class="belief-blocks">
+        <div class="belief-block reveal" data-belief="vision">
+          <span class="belief-label">Our Vision</span>
+          <p class="belief-text belief-headline">A <span class="belief-highlight">Digital Elixir</span> for all.</p>
+          <p class="belief-text">We envision a world where AI solves humanity's open challenges — not just the profitable ones. From transforming how businesses operate in the new AI era to ensuring that <span class="belief-highlight">the impact of AI is equitable to all</span> — not exclusive to a privileged few.</p>
+        </div>
+
+        <div class="belief-block reveal" data-belief="mission">
+          <span class="belief-label">Our Mission</span>
+          <p class="belief-text belief-headline">Build safe. Build trusted. Build right.</p>
+          <p class="belief-text">Every agent we ship goes through Context, Build, Secure, and Assure — because cutting corners on AI isn't just bad engineering, it's irresponsible. We build safe, trusted AI with <span class="belief-highlight">engineering excellence</span> at every stage.</p>
+        </div>
+
+        <div class="belief-block reveal" data-belief="intent">
+          <span class="belief-label">Our Intent</span>
+          <p class="belief-text belief-headline">Why we started Digixr.</p>
+          <p class="belief-text">AI as a healing, transformative force. We exist to solve humanity's open challenges and ensure the benefits of AI reach everyone. Wherever there's a problem worth solving, we want AI there — built right, and <span class="belief-highlight">accessible to all.</span></p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1896,9 +1912,10 @@
         <div class="footer-col-title">Navigate</div>
         <ul class="footer-links">
           <li><a href="#services">Services</a></li>
+          <li><a href="#clients">Clients</a></li>
           <li><a href="#blueprints">Blueprints</a></li>
-          <li><a href="#purpose">Purpose</a></li>
           <li><a href="#insights">Insights</a></li>
+          <li><a href="#purpose">Purpose</a></li>
         </ul>
       </div>
 
@@ -2222,12 +2239,22 @@
         tools.forEach((t, i) => {
           nodes.push({ x: cx+Math.cos(t.angle)*tR, y: cy+Math.sin(t.angle)*tR, baseX: cx+Math.cos(t.angle)*tR, baseY: cy+Math.sin(t.angle)*tR, label: t.label, color: t.color, size: 16*scale, group: t.group, phase: i*1.5+3 });
         });
+
+        // LLM Strategy nodes (between supervisor and workers)
+        const llmNodes = [
+          { label: 'LLM Core', angle: Math.PI*0.65, color: EMERALD, group: 'llm' },
+          { label: 'Fine-tune', angle: Math.PI*1.15, color: EMERALD, group: 'llm' },
+        ];
+        const llmR = 65*scale;
+        llmNodes.forEach((l, i) => {
+          nodes.push({ x: cx+Math.cos(l.angle)*llmR, y: cy+Math.sin(l.angle)*llmR, baseX: cx+Math.cos(l.angle)*llmR, baseY: cy+Math.sin(l.angle)*llmR, label: l.label, color: l.color, size: 16*scale, group: l.group, phase: i*1.3+6 });
+        });
       }
 
       function spawnSignal() {
         if (nodes.length < 2) {return;}
         // Signals flow from supervisor (0) to workers (1-3) or workers to tools (4-6)
-        const pairs = [[0,1],[0,2],[0,3],[1,4],[2,5],[3,6],[4,0],[5,0],[6,0]];
+        const pairs = [[0,1],[0,2],[0,3],[1,4],[2,5],[3,6],[4,0],[5,0],[6,0],[0,7],[0,8],[7,0],[8,0]];
         const pair = pairs[Math.floor(Math.random()*pairs.length)];
         const from = nodes[pair[0]], to = nodes[pair[1]];
         const mx = (from.x+to.x)/2, my = (from.y+to.y)/2;
@@ -2248,12 +2275,13 @@
         activeHighlight = hovered ? hovered.dataset.highlight : null;
 
         // Connection lines
-        const connections = [[0,1],[0,2],[0,3],[1,4],[2,5],[3,6]];
+        const connections = [[0,1],[0,2],[0,3],[1,4],[2,5],[3,6],[0,7],[0,8]];
         for (const [ai,bi] of connections) {
           const a = nodes[ai], b = nodes[bi];
           const isHighlighted = activeHighlight && (
             (activeHighlight === 'design' && a.group === 'design' && b.group === 'design') ||
-            (activeHighlight === 'tools' && (a.group === 'tools' || b.group === 'tools'))
+            (activeHighlight === 'tools' && (a.group === 'tools' || b.group === 'tools')) ||
+            (activeHighlight === 'llm' && (a.group === 'llm' || b.group === 'llm'))
           );
           const alpha = isHighlighted ? 0.25 : (activeHighlight ? 0.04 : 0.08);
           ctx.beginPath(); ctx.moveTo(a.x, a.y);
@@ -2299,6 +2327,7 @@
           const isHighlighted = activeHighlight && (
             (activeHighlight === 'design' && n.group === 'design') ||
             (activeHighlight === 'tools' && n.group === 'tools') ||
+            (activeHighlight === 'llm' && n.group === 'llm') ||
             (activeHighlight === 'lifecycle')
           );
           const dimmed = activeHighlight && !isHighlighted;
@@ -2359,7 +2388,7 @@
         const gateData = [
           { label: 'Agentic Eval', metric: 'Convergence', value: 94.7, unit: '%', color: TEAL, highlight: 'eval' },
           { label: 'LLM Judge', metric: 'RAGAS Score', value: 0.91, unit: '', color: TEAL, highlight: 'judge' },
-          { label: 'Explainable AI', metric: 'SHAP Coverage', value: 87, unit: '%', color: TEAL, highlight: 'xai' },
+          { label: 'Interpretability', metric: 'Trajectory Score', value: 0.92, unit: '', color: TEAL, highlight: 'xai' },
           { label: 'Trustworthy', metric: 'Toxicity', value: 0.02, unit: '%', color: TEAL, highlight: 'trust' },
         ];
         const startY = H*0.12, endY = H*0.88;
@@ -2528,13 +2557,15 @@
         const maxR = Math.min(W,H)*0.38;
 
         // Draw concentric rings
+        const ringDimmed = activeHighlight && activeHighlight !== 'layers';
         for (let i = 0; i < layers.length; i++) {
           const t = i / (layers.length - 1);
           const r = maxR * (1 - t*0.75);
           const color = lerpColor(CYAN, EMERALD, t);
           const isHighlighted = activeHighlight === 'layers';
-          const baseAlpha = isHighlighted ? 0.2 : 0.08;
-          const pulseAlpha = Math.sin(now*0.6 + i*0.5)*0.02;
+          const dimFactor = ringDimmed ? 0.25 : 1;
+          const baseAlpha = (isHighlighted ? 0.2 : 0.08) * dimFactor;
+          const pulseAlpha = Math.sin(now*0.6 + i*0.5)*0.02 * dimFactor;
 
           // Ring fill
           ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2);
@@ -2553,7 +2584,7 @@
           if (W > 400) {
             ctx.font = `500 ${Math.max(9, W*0.022)}px 'Inter'`;
             ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
-            ctx.fillStyle = rgba(color, isHighlighted ? 0.7 : 0.3);
+            ctx.fillStyle = rgba(color, (isHighlighted ? 0.7 : 0.3) * dimFactor);
             ctx.fillText(layers[i].label, labelX, labelY);
           }
         }
@@ -2603,12 +2634,13 @@
         ctx.fillStyle = 'rgba(255,255,255,0.9)'; ctx.fill();
 
         // ─── Context chaining (bottom) ───
+        const chainDimmed = activeHighlight && activeHighlight !== 'chain';
         const chainY = H*0.85;
         const chainNodes = ['Analysis', 'Synthesis', 'Recommendation'];
         const chainSpacing = Math.min(W*0.28, 140);
         const chainStartX = cx - chainSpacing;
         const isChainHighlighted = activeHighlight === 'chain';
-        const chainAlpha = isChainHighlighted ? 0.8 : 0.35;
+        const chainAlpha = isChainHighlighted ? 0.8 : (chainDimmed ? 0.12 : 0.35);
 
         for (let i = 0; i < chainNodes.length; i++) {
           const nx = chainStartX + i*chainSpacing;
@@ -2641,6 +2673,82 @@
             ctx.textAlign = 'center'; ctx.textBaseline = 'top';
             ctx.fillStyle = rgba(color, chainAlpha);
             ctx.fillText(chainNodes[i], nx, chainY + 20);
+          }
+        }
+
+        // ─── Knowledge Engineering cluster (right side) ───
+        if (W > 500) {
+          const isKnowledgeHighlighted = activeHighlight === 'knowledge';
+          const knowledgeDimmed = activeHighlight && activeHighlight !== 'knowledge';
+          const kAlpha = isKnowledgeHighlighted ? 0.8 : (knowledgeDimmed ? 0.12 : 0.35);
+
+          const kNodes = [
+            { label: 'RAG', ox: 0, oy: -28 },
+            { label: 'KG', ox: 30, oy: 8 },
+            { label: 'Embed', ox: -25, oy: 18 },
+            { label: 'Retrieve', ox: 10, oy: 38 },
+          ];
+          const kx = W*0.82, ky = H*0.38;
+
+          // Glow on highlight
+          if (isKnowledgeHighlighted) {
+            const kGlow = ctx.createRadialGradient(kx, ky, 0, kx, ky, 60);
+            kGlow.addColorStop(0, rgba(EMERALD, 0.08));
+            kGlow.addColorStop(1, rgba(EMERALD, 0));
+            ctx.beginPath(); ctx.arc(kx, ky, 60, 0, Math.PI*2);
+            ctx.fillStyle = kGlow; ctx.fill();
+          }
+
+          // Connecting lines between knowledge nodes
+          const kEdges = [[0,1],[0,2],[1,3],[2,3]];
+          for (const [ai,bi] of kEdges) {
+            const a = kNodes[ai], b = kNodes[bi];
+            ctx.beginPath();
+            ctx.moveTo(kx+a.ox, ky+a.oy);
+            ctx.lineTo(kx+b.ox, ky+b.oy);
+            ctx.strokeStyle = rgba(EMERALD, kAlpha*0.3);
+            ctx.lineWidth = isKnowledgeHighlighted ? 1.2 : 0.8;
+            ctx.setLineDash([2,3]); ctx.stroke(); ctx.setLineDash([]);
+          }
+
+          // Connector from cluster to nearest ring edge
+          const ringEdgeX = cx + maxR*0.7;
+          ctx.beginPath();
+          ctx.moveTo(kx - 35, ky + 5);
+          ctx.lineTo(ringEdgeX + 15, cy - maxR*0.15);
+          ctx.strokeStyle = rgba(EMERALD, kAlpha*0.25);
+          ctx.lineWidth = 0.8;
+          ctx.setLineDash([4,6]); ctx.stroke(); ctx.setLineDash([]);
+
+          // Flowing particle on connector when highlighted
+          if (isKnowledgeHighlighted) {
+            const flowT = (now*0.5) % 1;
+            const fx = (kx - 35) + ((ringEdgeX + 15) - (kx - 35)) * flowT;
+            const fy = (ky + 5) + ((cy - maxR*0.15) - (ky + 5)) * flowT;
+            ctx.beginPath(); ctx.arc(fx, fy, 2.5, 0, Math.PI*2);
+            ctx.fillStyle = rgba(EMERALD, 0.6); ctx.fill();
+          }
+
+          // Draw knowledge nodes
+          for (const kn of kNodes) {
+            const nx = kx + kn.ox, ny = ky + kn.oy;
+
+            // Node circle
+            ctx.beginPath(); ctx.arc(nx, ny, 10, 0, Math.PI*2);
+            ctx.fillStyle = rgba(EMERALD, 0.06 * (kAlpha/0.35));
+            ctx.strokeStyle = rgba(EMERALD, kAlpha*0.5);
+            ctx.lineWidth = isKnowledgeHighlighted ? 1.8 : 1;
+            ctx.fill(); ctx.stroke();
+
+            // Inner dot
+            ctx.beginPath(); ctx.arc(nx, ny, 3, 0, Math.PI*2);
+            ctx.fillStyle = rgba(EMERALD, kAlpha*0.6); ctx.fill();
+
+            // Label
+            ctx.font = `500 ${Math.max(8, W*0.018)}px 'Inter'`;
+            ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+            ctx.fillStyle = rgba(EMERALD, kAlpha);
+            ctx.fillText(kn.label, nx, ny + 14);
           }
         }
 
@@ -3163,97 +3271,218 @@
     initBlueprintViz('education');
 
     /* ═══════════════════════════════════════════════════════════════
-       RIPPLE FIELD — PURPOSE SECTION CANVAS
-       "A Digital Elixir for all" — ripples reach every seed equally
+       DIGIXR ANIMATION — PURPOSE SECTION CANVAS
+       Solid D → Logo D using pre-extracted pixel mask from logo PNG
+       Particles = gaps in logo D (pre-computed, no runtime image loading)
+       Original ripple-field backed up at mockups/archive/ripple-field-animation-backup.js
        ═══════════════════════════════════════════════════════════════ */
-    (function initRippleField() {
+    (function initDigixrAnimation() {
       const canvas = document.getElementById('elixirCanvas');
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
-      let W, H, cx, cy, maxRadius;
-      let animId = null;
-      let frameCount = 0;
+      let W, H, animId = null;
+      let startTime = null;
+
+      // ── Pre-extracted logo D mask (120x120 grid, 1=filled 0=empty) ──
+      // Generated from image/logo/logo-dark-orig.png using mockups/tools/extract-mask.mjs
+      const MG = 120; // mask grid size
+      const MASK = '000000000111111100000111111111111111110000000111111111100000111111110000000000000000000000000000000000000000000000000000000000000111111100000011111111111111110000000011111111000000111111111111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001111111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001111100000000000000000000000000000000000000000001111100000111111111111111111111100011111111111111111111111110000000000000011111100000000000000000000000000000000000000001111000000011111111111111111111000001111111111111111111111111111000000000000111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111111100000000011111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111100000000111110000000000000000000000000000000000000000000011100000000111111111110000000001111110000011111111000000000011111100000011111100000000000000000000000000000000000000000001000000000011111111100000000000111100000011111111111100000000011111000000111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111110000000111110000011111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111100000001111100001111110000000000000000000000000001111111111111111111111111111111111100000000011111111111100000000000001111100000011111000111111000000000000000000000000001111111111111111111111111111111111100000000011111111111111111000000000011111000001111100011111110000000000000000000000000000000000000000000000000000000000000000000000000000000111111111100000000111100000011110001111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111100000001111000001111100111111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111000000111110000111110011111110000000000000000000000000000000000000011111111111111111111111110000001111111110000000000011111000001111000111111011111111000000000000000000000000000000000000011111111111111111111111110000001111111111111000000000111100000111110011111101111111100000000000000000000000000000000000000000000000000000000000000000000000000001111111100000001111000011111001111110111111110000000000000000000000000000000000000000000000000000000000000000000000000000000111111000000011110001111100111111111111110000000000000000000000001111111111100000111111000111111100000000011100000000000000011111100001111000111111111111111111111000000000000000000000001111111111100001111111100111111110000000111110000010000000000111110000111110011111111111111111111100000000000000000000000000000000000000000000000000000000000000000000000111111100000000111110001111001111111111111111111110000000000000000000000000000000000000000000000000000000000000000000000001111111000000001111000111100111111111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000011111000000011110011111111111111111111111111000000000000000000000000111110000000111111111111111111110000000111110000000000111110000001111001111111111111111111111111100000000000000000000000011110000000111111111111111111100000000111111111100000000111100000111100111111111111111111111111110000000000000000000000000000000000000000000000000000000000000000001111111110000001111000011110011111111111111111111111110000000000000000000000000000000000000000000000000000000000000000000000111111110000111100001111011111111111111111111111111000000000000000000000000000000011000111111111111100000011111111111111100011111110001111001111111111111111111111111111111000000000000000000000000000000011000111111111111100000011111111111111111100111111100011100111111111111111111111111111111100000000000000000000000000000000000000000000000000000000000000000000011111110111111101110011111111111111111111111111111100000000000000000000000000000000000000000000000000000000000000000000000001111111111110111011111111111111111111111111111100000000000000000000000000000000000000000000000000000000000000000000000000011111111111101101111111111111111111111111111110000111100000011110000001111000111111111111111111111111100000000000000000000111111111111111111111111111111111111111111110000111000000001100000001110000111111111111111111111111000000000000000000000001111111111111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000111111111111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000001111111111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000000111111111111111111111111111111111111111100000000000001110011100000111111111111111111111111111100000000000000000000000000011111111111111111111111111111111111111100000000000000100001000000011001111111111111111111111000000000000000000000000000001111111111111111111111111111111111111100000000000000000000000000000000000000000000000000000000000000000000000000000000000111111111111111111111111111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000000000111111111111111111111111111111111111110000000011100000001111100111111111111111111111111111000000000000000000000000000000011111111111111111111111111111111111110000000011110000011111100111111111111111111111111111100000000000000000000000000000011111111111111111111111111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000000000001111111111111111111111111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000000000001111111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000111111111111111111111111111111111111000000000000011110000111111111111111111111111111111100000000000000000000000000000000111111111111111111111111111111111111000000000000011110000111111111111111111111111111111100000000000000000000000000000000011111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111111111111111111111111111111000000000011100011100000111111111111111111111111111100000000000000000000000000000000011111111111111111111111111111111111000000000011100011100001111111111111111111111111111100000000000000000000000000000000011111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111111111111111111111111111111000000001111100000001111111110011111111111111111111100000000000000000000000000000000001111111111111111111111111111111111000000001111100000001111111110011111111111111111111100000000000000000000000000000000011111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111111111111111111111111111111000000000000000011100011111100111111111111111111111000000000000000000000000000000000011111111111111111111111111111111111000000000000000011100011111110111111111111111111111000000000000000000000000000000000011111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000111111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000111111111111111111111111111111111111000011100001111000011111001111111111111111111111111000000000000000000000000000000000111111111111111111111111111111111111000011000001110000001110000111111111111111111111111000000000000000000000000000000001111111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000000001111111111111111111111111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111111111111111111111111111111110000000000011110000110001111111111111111111111111111000000000000000000000000000000111111111111111111111111111111111111110000000000011110000110001111111111111111111111111111000000000000000000000000000000111111111111111111111111111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000000001111111111111111111111111111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000000011111111111111111111111111111111111111100000000000000000000000000000000000000000000000000000000000000000000000000000000011111111111111111111111111111111111111100000000000001111111100001111111111111111111111111111000000000000000000000000001111111111111111111111111111111111111111100000000000000111111000000111001111111111111111111111000000000000000000000000011111111111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000111111111111111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000001111111111011111111111111111111111111111111000000000110000011000000011100111111111111111111111110000000000000000000000111111111110111111111111111111111111111111110000000001110000111100000011111111111111111111111111111000000000000000000011111111111101111111111111111111111111111111110000000000000000000000000000000000000000000000000000000000000000000000011111001111110011111111111111111111111111111111100000000000000000000000000000000000000000000000000000000000000000000111111100111111100111011111111111111111111111111111100000000000000000000000000000011111111111111100001111111000000001111111100011111100001110111111111111111111111111111111000000000000000000000000000000001111111111111000000111111000000000110000001111110000111001111111111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000001111110000011110011111111111111111111111111111110000000000000000000000000000000000000000000000000000000000000000000001111110000000111100011110111111111111111111111111110000000000000000000000000000000000000000000000000000000000000000111111110000000011110000111100111111111111111111111111100000000000000000000000000000001110001111111111111100000001111111111100000000001111000011111001111111111111111111111111000000000000000000000000000000001110001111111111111100000001111110000000000001111100000011110011111111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000001111110000001111000111100111111111111111111110000000000000000000000000000000000000000000000000000000000000000000000111111110000000111110001111101111111111111111111100000000000000000000001111000001111111111111111111111100000011111111111111100000000011111000111110011111111111111111111000000000000000000000001111000001111111111111111111111100000011111111111000000000001111100001111100111111111111111111111000000000000000000000000000000000000000000000000000000000000000000000000000000011111100000011110001111110111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000011111110000001111100011111001111111111111100000000000000000000000111111110000000000111111111110000111111111111111111111111100000000111110000111110011111111111111000000000000000000000001111111111000000000111111111111001111111111111111111111000000000001111100001111100111111101111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000001111100000111110000111110011111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000111110000001111100001111100111111000000000000000000000000000000000000000000000000000000000000000000000000000000000111111110000000111110000111111001111110000000000000000000000000000000000001111111111111111111111100100000000000011111111111110000000011111100001111110011111100000000000000000000000000000000000011111111111111111111111100110000000000111111111110000000001111110000011111000111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111110000000111100001111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111111000000011111000011111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000111111111000000001111100000111110000000000000000000000000000000000000000000000000011100000111111111111110000000001111111111111000000000111110000001111100000000000000000000000000000000000000000000000000011100000111111111111110000000001111111000000000000111111000000111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111111100000001111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111111111000000000111110000000000000000000000000000000000000000000000000000011001101111111111111000000000000000011111111111111000000000011111000000000000000000000000000000000000000000000000000000011011101111111111111000000000000000011111111000000000000011111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111111111100000000000000000000000000000000000000000000000000000000000001111111111111111111011111111111111111111111111111111111000000000000000000000000000000000000000000000000';
+
+      // Timing
+      const HOLD_SOLID = 2.0;
+      const DISSOLVE_DURATION = 8.0;
+      const DISSOLVE_START = HOLD_SOLID;
+
+      // Layout
+      let cx, cy, dSize, maxRadius;
+      let solidCanvas, solidCtx;
+      let logoCanvas, logoCtx;
+      let tempCanvas, tempCtx;
+      let particles = [];       // dissolve particles (break from D)
+      let dissolveProgress = 0;
+      let seeds = [];           // blossom targets surrounding D
+      let ripples = [];         // concentric ripple rings from center
       let rippleId = 0;
+      let frameCount = 0;
 
-      const seedColors = [CYAN, TEAL, EMERALD];
+      // ── Render solid D with hollow center ──
+      function renderSolidD(offCtx, ox, oy, size) {
+        const w = size * 0.88, h = size, thick = size * 0.22;
+        const oL = ox - w * 0.38, oT = oy - h / 2, oB = oy + h / 2;
 
-      // State
-      let seeds = [];
-      let ripples = [];
-      let ambient = [];
-      let originFlash = 0; // brightness spike when emitting ripple
+        const outer = new Path2D();
+        outer.moveTo(oL, oT);
+        outer.lineTo(ox + w * 0.12, oT);
+        outer.bezierCurveTo(ox + w * 0.78, oT, ox + w * 0.78, oB, ox + w * 0.12, oB);
+        outer.lineTo(oL, oB);
+        outer.closePath();
 
+        const inner = new Path2D();
+        const iL = oL + thick, iT = oT + thick, iB = oB - thick;
+        inner.moveTo(iL, iT);
+        inner.lineTo(ox + w * 0.06, iT);
+        inner.bezierCurveTo(ox + w * 0.56, iT, ox + w * 0.56, iB, ox + w * 0.06, iB);
+        inner.lineTo(iL, iB);
+        inner.closePath();
+
+        const grad = offCtx.createLinearGradient(0, oT, 0, oB);
+        grad.addColorStop(0, `rgb(${CYAN.r},${CYAN.g},${CYAN.b})`);
+        grad.addColorStop(0.45, `rgb(${TEAL.r},${TEAL.g},${TEAL.b})`);
+        grad.addColorStop(1, `rgb(${EMERALD.r},${EMERALD.g},${EMERALD.b})`);
+
+        offCtx.fillStyle = grad;
+        offCtx.fill(outer);
+        offCtx.save();
+        offCtx.globalCompositeOperation = 'destination-out';
+        offCtx.fillStyle = '#000';
+        offCtx.fill(inner);
+        offCtx.restore();
+      }
+
+      // ── Render logo D from pre-computed mask ──
+      function renderLogoD(offCtx, ox, oy, size) {
+        renderSolidD(offCtx, ox, oy, size);
+        const w = size * 0.88, h = size;
+        const oL = ox - w * 0.38, oT = oy - h / 2;
+        const dBoundsW = w * 1.16, dBoundsH = h;
+
+        offCtx.save();
+        offCtx.globalCompositeOperation = 'destination-out';
+        offCtx.fillStyle = '#000';
+        const cellW = dBoundsW / MG, cellH = dBoundsH / MG;
+        for (let gy = 0; gy < MG; gy++) {
+          for (let gx = 0; gx < MG; gx++) {
+            if (MASK[gy * MG + gx] === '0') {
+              offCtx.fillRect(oL + gx * cellW, oT + gy * cellH, cellW + 0.5, cellH + 0.5);
+            }
+          }
+        }
+        offCtx.globalCompositeOperation = 'source-over';
+        offCtx.restore();
+      }
+
+      // ── Compute dissolve particles from pixel diff ──
+      function computeParticles() {
+        particles = [];
+        const dpr = window.devicePixelRatio || 1;
+        const solidData = solidCtx.getImageData(0, 0, solidCanvas.width, solidCanvas.height);
+        const logoData = logoCtx.getImageData(0, 0, logoCanvas.width, logoCanvas.height);
+        const sw = solidCanvas.width;
+        const particleR = Math.max(1.2, dSize * 0.006);
+        const step = Math.max(2, Math.round(particleR * 2 * dpr));
+        const solidTop = cy - dSize / 2;
+
+        for (let py = 0; py < solidCanvas.height; py += step) {
+          for (let px = 0; px < sw; px += step) {
+            const idx = (py * sw + px) * 4;
+            if (solidData.data[idx + 3] > 50 && logoData.data[idx + 3] <= 50) {
+              const x = px / dpr, y = py / dpr;
+              const vt = Math.max(0, Math.min(1, (y - solidTop) / dSize));
+              const color = vt < 0.4 ? lerpColor(CYAN, TEAL, vt / 0.4)
+                          : lerpColor(TEAL, EMERALD, (vt - 0.4) / 0.6);
+
+              // Angle from center of D — particles radiate outward in all directions
+              const dx = x - cx, dy = y - cy;
+              const angle = Math.atan2(dy, dx);
+              // Staggered delay: inner pixels release before outer
+              const distFromCenter = Math.sqrt(dx * dx + dy * dy);
+              const maxDist = dSize * 0.5;
+              const delay = Math.min(0.95, (distFromCenter / maxDist) * 0.6 + Math.random() * 0.3);
+
+              particles.push({
+                ox: x, oy: y, x, y,
+                r: particleR * (0.6 + Math.random() * 0.8),
+                angle, vx: 0, vy: 0,
+                color, alpha: 0, delay,
+                released: false, impacted: false,
+                phase: Math.random() * Math.PI * 2,
+                travelDist: 0, maxTravel: 50 + Math.random() * 120
+              });
+            }
+          }
+        }
+      }
+
+      // ── Seeds (blossom targets surrounding D) ──
       function generateSeeds() {
         seeds = [];
+        const seedColors = [CYAN, TEAL, EMERALD];
         const count = Math.max(12, Math.min(20, Math.floor(W * H / 5000)));
+        // Grid-based placement for even distribution
         const cols = 5, rows = 4;
         const cellW = W / cols, cellH = H / rows;
-
-        // Fill grid cells, pick ~count cells randomly
         const cells = [];
         for (let r = 0; r < rows; r++)
           for (let c = 0; c < cols; c++)
             cells.push({ c, r });
-
-        // Shuffle and pick
+        // Shuffle
         for (let i = cells.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
           [cells[i], cells[j]] = [cells[j], cells[i]];
         }
         const used = cells.slice(0, count);
-
         used.forEach((cell, i) => {
-          const jitterX = (Math.random() - 0.5) * cellW * 0.7;
-          const jitterY = (Math.random() - 0.5) * cellH * 0.7;
-          const x = (cell.c + 0.5) * cellW + jitterX;
-          const y = (cell.r + 0.5) * cellH + jitterY;
-          const distFromCenter = Math.sqrt((x - cx) * (x - cx) + (y - cy) * (y - cy));
+          const jX = (Math.random() - 0.5) * cellW * 0.7;
+          const jY = (Math.random() - 0.5) * cellH * 0.7;
+          const x = (cell.c + 0.5) * cellW + jX;
+          const y = (cell.r + 0.5) * cellH + jY;
+          const distFromCenter = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2);
           seeds.push({
-            x, y,
-            distFromCenter,
+            x, y, distFromCenter,
             baseSize: 1.2 + Math.random() * 1.3,
             baseAlpha: 0.06 + Math.random() * 0.04,
-            currentAlpha: 0,
-            currentSize: 0,
-            bloomTimer: 0,
             color: seedColors[i % 3],
-            phase: Math.random() * Math.PI * 2,
-            lastRippleId: -1
+            bloom: 0,             // 0→1 blooming, then fades back
+            bloomDecay: false,
+            lastRippleId: -1,
+            phase: Math.random() * Math.PI * 2
           });
-          seeds[seeds.length - 1].currentAlpha = seeds[seeds.length - 1].baseAlpha;
-          seeds[seeds.length - 1].currentSize = seeds[seeds.length - 1].baseSize;
         });
       }
 
-      function generateAmbient() {
-        ambient = [];
-        const count = Math.min(8, Math.floor(W * H / 12000));
-        for (let i = 0; i < count; i++) {
-          ambient.push({
-            x: Math.random() * W, y: Math.random() * H,
-            vx: (Math.random() - 0.5) * 0.1, vy: (Math.random() - 0.5) * 0.1,
-            size: 0.6 + Math.random() * 0.9, alpha: 0.03 + Math.random() * 0.04
-          });
-        }
-      }
-
-      function resize() {
+      // ── Setup ──
+      function setup() {
         const dpr = window.devicePixelRatio || 1;
         const rect = canvas.parentElement.getBoundingClientRect();
-        W = rect.width; H = parseInt(getComputedStyle(canvas).height) || 340;
+        W = rect.width;
+        H = parseInt(getComputedStyle(canvas).height) || 440;
         canvas.width = W * dpr; canvas.height = H * dpr;
         canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        cx = W / 2; cy = H / 2;
+
+        cx = W * 0.5;
+        cy = H * 0.38;
+        dSize = Math.min(W * 0.4, H * 0.65);
         maxRadius = Math.sqrt(W * W + H * H) / 2 + 20;
+
+        solidCanvas = document.createElement('canvas');
+        solidCanvas.width = W * dpr; solidCanvas.height = H * dpr;
+        solidCtx = solidCanvas.getContext('2d');
+        solidCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        renderSolidD(solidCtx, cx, cy, dSize);
+
+        logoCanvas = document.createElement('canvas');
+        logoCanvas.width = W * dpr; logoCanvas.height = H * dpr;
+        logoCtx = logoCanvas.getContext('2d');
+        logoCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        renderLogoD(logoCtx, cx, cy, dSize);
+
+        tempCanvas = document.createElement('canvas');
+        tempCanvas.width = W * dpr; tempCanvas.height = H * dpr;
+        tempCtx = tempCanvas.getContext('2d');
+
+        computeParticles();
         generateSeeds();
-        generateAmbient();
+        ripples = [];
+        dissolveProgress = 0;
+        steadyTimer = 0;
+        startTime = null;
       }
 
+      // ── Spawn concentric ripple from D center ──
       function spawnRipple() {
         rippleId++;
         ripples.push({ id: rippleId, radius: 0, alpha: 0.35 });
-        originFlash = 1.0;
       }
 
       function getRippleColor(radius) {
@@ -3263,32 +3492,122 @@
         return EMERALD;
       }
 
-      function drawAmbient() {
-        ambient.forEach(p => {
-          p.x += p.vx; p.y += p.vy;
-          if (p.x < 0 || p.x > W) p.vx *= -1;
-          if (p.y < 0 || p.y > H) p.vy *= -1;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-          ctx.fillStyle = rgba(TEAL, p.alpha);
-          ctx.fill();
-        });
-      }
+      // ── Update ──
+      function update(elapsed, t) {
+        // Phase 1: Dissolve
+        if (elapsed >= DISSOLVE_START) {
+          dissolveProgress = Math.min(1, (elapsed - DISSOLVE_START) / DISSOLVE_DURATION);
+        }
 
-      function drawRipples(t) {
+        // Update dissolve particles
+        particles.forEach(p => {
+          if (!p.released && dissolveProgress > p.delay) {
+            p.released = true;
+            p.alpha = 0.8;
+            const speed = 0.2 + Math.random() * 0.6;
+            p.vx = Math.cos(p.angle) * speed;
+            p.vy = Math.sin(p.angle) * speed;
+          }
+          if (p.released) {
+            p.vx += Math.sin(t * 0.8 + p.phase) * 0.005;
+            p.vy += Math.cos(t * 0.6 + p.phase) * 0.004;
+            p.vx *= 0.996;
+            p.vy *= 0.996;
+            p.x += p.vx;
+            p.y += p.vy;
+            const dist = Math.sqrt((p.x - p.ox) ** 2 + (p.y - p.oy) ** 2);
+            p.alpha = Math.max(0, 0.8 - dist / (W * 0.35));
+          }
+        });
+
+        // Concentric ripples — spawn every ~3s (180 frames)
+        frameCount++;
+        if (frameCount % 180 === 0) spawnRipple();
+
+        // Update ripples (expand from center, fade out)
         for (let i = ripples.length - 1; i >= 0; i--) {
           const rip = ripples[i];
           const speed = Math.max(0.3, 0.6 - rip.radius * 0.0005);
           rip.radius += speed;
           rip.alpha = 0.35 * (1 - rip.radius / maxRadius);
+          if (rip.radius > maxRadius || rip.alpha <= 0) { ripples.splice(i, 1); continue; }
 
-          if (rip.radius > maxRadius) { ripples.splice(i, 1); continue; }
-          if (rip.alpha <= 0) { ripples.splice(i, 1); continue; }
+          // Ripple passes a seed → trigger bloom
+          seeds.forEach(seed => {
+            if (seed.lastRippleId === rip.id) return;
+            if (Math.abs(rip.radius - seed.distFromCenter) < 6) {
+              seed.lastRippleId = rip.id;
+              if (seed.bloom <= 0.05 && !seed.bloomDecay) {
+                seed.bloom = 0.01;
+              }
+            }
+          });
+        }
 
+        // Update seed blooms (bloom up → peak → fade back to dormant)
+        seeds.forEach(s => {
+          if (s.bloom > 0 && !s.bloomDecay) {
+            s.bloom = Math.min(1, s.bloom + 0.015);
+            if (s.bloom >= 1) s.bloomDecay = true;
+          }
+          if (s.bloomDecay) {
+            s.bloom = Math.max(0, s.bloom - 0.008);
+            if (s.bloom <= 0) s.bloomDecay = false;
+          }
+        });
+      }
+
+      // ── Draw: D shape ──
+      function drawDShape() {
+        const dpr = window.devicePixelRatio || 1;
+        if (dissolveProgress <= 0) {
+          ctx.drawImage(solidCanvas, 0, 0, solidCanvas.width, solidCanvas.height, 0, 0, W, H);
+          return;
+        }
+        if (dissolveProgress >= 1) {
+          ctx.drawImage(logoCanvas, 0, 0, logoCanvas.width, logoCanvas.height, 0, 0, W, H);
+          return;
+        }
+        ctx.drawImage(logoCanvas, 0, 0, logoCanvas.width, logoCanvas.height, 0, 0, W, H);
+        tempCtx.setTransform(1, 0, 0, 1, 0, 0);
+        tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+        tempCtx.drawImage(solidCanvas, 0, 0);
+        tempCtx.globalCompositeOperation = 'destination-out';
+        tempCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        particles.forEach(p => {
+          if (p.released) {
+            tempCtx.beginPath();
+            tempCtx.arc(p.ox, p.oy, p.r + 0.5, 0, Math.PI * 2);
+            tempCtx.fill();
+          }
+        });
+        tempCtx.globalCompositeOperation = 'source-over';
+        ctx.drawImage(tempCanvas, 0, 0, tempCanvas.width, tempCanvas.height, 0, 0, W, H);
+      }
+
+      // ── Draw: dissolve particles ──
+      function drawParticles(t) {
+        particles.forEach(p => {
+          if (!p.released || p.alpha <= 0.01) return;
+          const shimmer = 0.85 + 0.15 * Math.sin(t * 3 + p.phase);
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r * 2.5, 0, Math.PI * 2);
+          ctx.fillStyle = rgba(p.color, p.alpha * 0.07 * shimmer);
+          ctx.fill();
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = rgba(p.color, p.alpha * shimmer);
+          ctx.fill();
+        });
+      }
+
+      // ── Draw: concentric ripples from center ──
+      function drawRipples(t) {
+        ripples.forEach(rip => {
           const color = getRippleColor(rip.radius);
           const pts = 48;
 
-          // Primary ring
+          // Primary ring with organic distortion
           ctx.beginPath();
           for (let j = 0; j <= pts; j++) {
             const theta = (j / pts) * Math.PI * 2;
@@ -3317,160 +3636,117 @@
           ctx.strokeStyle = rgba(color, rip.alpha * 0.3);
           ctx.lineWidth = 0.8;
           ctx.stroke();
-
-          // Check seed blooms
-          seeds.forEach(seed => {
-            if (seed.lastRippleId === rip.id) return;
-            if (Math.abs(rip.radius - seed.distFromCenter) < 6) {
-              seed.bloomTimer = 1.0;
-              seed.lastRippleId = rip.id;
-            }
-          });
-        }
-      }
-
-      function drawSeeds(t) {
-        const glowR = Math.min(22, W * 0.045);
-
-        seeds.forEach(seed => {
-          // Gentle bob
-          const bobX = Math.sin(t * 0.7 + seed.phase) * 1;
-          const bobY = Math.cos(t * 0.6 + seed.phase + 1) * 0.8;
-          const sx = seed.x + bobX;
-          const sy = seed.y + bobY;
-
-          // Bloom decay
-          if (seed.bloomTimer > 0) {
-            seed.bloomTimer = Math.max(0, seed.bloomTimer - 0.01);
-          }
-
-          // EQUITY: same peak intensity for all seeds, near or far
-          const bt = seed.bloomTimer;
-          const bloomAlpha = seed.baseAlpha + (0.65 - seed.baseAlpha) * bt;
-          const bloomSize = seed.baseSize + 5 * bt;
-
-          // Color transformation: shift toward white during bloom
-          const bloomColor = bt > 0 ? lerpColor(seed.color, WHITE, bt * 0.5) : seed.color;
-
-          // Outer glow halo (visible during bloom)
-          if (bt > 0.15) {
-            const g1 = ctx.createRadialGradient(sx, sy, 0, sx, sy, glowR * 1.5);
-            g1.addColorStop(0, rgba(seed.color, 0.08 * bt));
-            g1.addColorStop(1, 'transparent');
-            ctx.fillStyle = g1;
-            ctx.beginPath();
-            ctx.arc(sx, sy, glowR * 1.5, 0, Math.PI * 2);
-            ctx.fill();
-          }
-
-          // Inner glow burst (first 40% of bloom — brighter, tighter)
-          if (bt > 0.6) {
-            const burstIntensity = (bt - 0.6) / 0.4;
-            const g2 = ctx.createRadialGradient(sx, sy, 0, sx, sy, glowR);
-            g2.addColorStop(0, rgba(WHITE, 0.2 * burstIntensity));
-            g2.addColorStop(0.3, rgba(bloomColor, 0.25 * burstIntensity));
-            g2.addColorStop(1, 'transparent');
-            ctx.fillStyle = g2;
-            ctx.beginPath();
-            ctx.arc(sx, sy, glowR, 0, Math.PI * 2);
-            ctx.fill();
-          }
-
-          // Seed dot — color transforms during bloom
-          ctx.beginPath();
-          ctx.arc(sx, sy, bloomSize, 0, Math.PI * 2);
-          ctx.fillStyle = rgba(bloomColor, bloomAlpha);
-          ctx.fill();
         });
       }
 
-      function drawOrigin(t) {
-        const breathe = 1 + 0.15 * Math.sin(t * 1.2);
-        const baseR = 6 * breathe;
+      // ── Draw: seeds with bloom & fade ──
+      function drawSeeds(t) {
+        seeds.forEach(s => {
+          const bob = Math.sin(t * 0.7 + s.phase) * 1;
+          const sx = s.x + Math.sin(t * 0.5 + s.phase) * 0.8;
+          const sy = s.y + bob;
+          const bt = s.bloom;
 
-        // Flash decay
-        if (originFlash > 0) originFlash = Math.max(0, originFlash - 0.03);
-        const flashBoost = originFlash * 0.2;
+          if (bt > 0.01) {
+            const eased = 1 - (1 - bt) * (1 - bt);
+            const bloomSize = s.baseSize + 5 * eased;
+            const bloomColor = lerpColor(s.color, WHITE, bt * 0.5);
 
-        // Outer atmospheric glow
-        const g1 = ctx.createRadialGradient(cx, cy, 0, cx, cy, 80);
-        g1.addColorStop(0, rgba(TEAL, 0.04 + flashBoost * 0.3));
-        g1.addColorStop(1, 'transparent');
-        ctx.fillStyle = g1;
-        ctx.beginPath(); ctx.arc(cx, cy, 80, 0, Math.PI * 2); ctx.fill();
+            // Outer glow halo
+            const haloR = Math.min(22, W * 0.045) * 1.5;
+            const g1 = ctx.createRadialGradient(sx, sy, 0, sx, sy, haloR);
+            g1.addColorStop(0, rgba(s.color, 0.08 * bt));
+            g1.addColorStop(1, 'transparent');
+            ctx.fillStyle = g1;
+            ctx.beginPath();
+            ctx.arc(sx, sy, haloR, 0, Math.PI * 2);
+            ctx.fill();
 
-        // Mid glow
-        const g2 = ctx.createRadialGradient(cx, cy, 0, cx, cy, 30);
-        g2.addColorStop(0, rgba(CYAN, 0.12 + flashBoost));
-        g2.addColorStop(1, 'transparent');
-        ctx.fillStyle = g2;
-        ctx.beginPath(); ctx.arc(cx, cy, 30, 0, Math.PI * 2); ctx.fill();
+            // Inner burst (first 40% of bloom)
+            if (bt > 0.6 && !s.bloomDecay) {
+              const burstI = (bt - 0.6) / 0.4;
+              const glowR = Math.min(22, W * 0.045);
+              const g2 = ctx.createRadialGradient(sx, sy, 0, sx, sy, glowR);
+              g2.addColorStop(0, rgba(WHITE, 0.2 * burstI));
+              g2.addColorStop(0.3, rgba(bloomColor, 0.25 * burstI));
+              g2.addColorStop(1, 'transparent');
+              ctx.fillStyle = g2;
+              ctx.beginPath();
+              ctx.arc(sx, sy, glowR, 0, Math.PI * 2);
+              ctx.fill();
+            }
 
-        // Core
-        const g3 = ctx.createRadialGradient(cx, cy, 0, cx, cy, baseR);
-        g3.addColorStop(0, rgba(WHITE, 0.3 + flashBoost));
-        g3.addColorStop(0.5, rgba(CYAN, 0.1 + flashBoost * 0.5));
-        g3.addColorStop(1, 'transparent');
-        ctx.fillStyle = g3;
-        ctx.beginPath(); ctx.arc(cx, cy, baseR, 0, Math.PI * 2); ctx.fill();
+            // Core dot — color shifts during bloom
+            ctx.beginPath();
+            ctx.arc(sx, sy, bloomSize, 0, Math.PI * 2);
+            ctx.fillStyle = rgba(bloomColor, s.baseAlpha + (0.65 - s.baseAlpha) * bt);
+            ctx.fill();
+          } else {
+            // Dormant: small dim dot
+            ctx.beginPath();
+            ctx.arc(sx, sy, s.baseSize, 0, Math.PI * 2);
+            ctx.fillStyle = rgba(s.color, s.baseAlpha);
+            ctx.fill();
+          }
+        });
       }
 
+      // ── Draw: brand text ──
       function drawBrandText(t) {
-        const textY = cy + 22;
-        const pulse = 0.18 + 0.07 * Math.sin(t * 0.8);
-        const fontSize = Math.max(11, Math.min(14, W * 0.028));
+        const dBottom = cy + dSize / 2;
+        const gap = dSize * 0.12;
 
         ctx.save();
         ctx.textAlign = 'center';
         ctx.textBaseline = 'top';
 
-        // Single line: "Digixr. Digital Elixir"
-        ctx.font = `800 ${fontSize}px "Plus Jakarta Sans", sans-serif`;
-        const brandText = 'Digixr.';
-        const brandWidth = ctx.measureText(brandText).width;
-
-        ctx.font = `italic 400 ${fontSize}px "Plus Jakarta Sans", sans-serif`;
-        const meaningText = ' Digital Elixir';
-        const meaningWidth = ctx.measureText(meaningText).width;
-
-        const totalWidth = brandWidth + meaningWidth;
-        const startX = cx - totalWidth / 2;
-
-        // Brand name — bold, brighter
-        ctx.font = `800 ${fontSize}px "Plus Jakarta Sans", sans-serif`;
-        ctx.fillStyle = rgba(CYAN, pulse + 0.15);
-        ctx.fillText(brandText, startX + brandWidth / 2, textY);
-
-        // Meaning — italic, softer
-        ctx.font = `italic 400 ${fontSize}px "Plus Jakarta Sans", sans-serif`;
-        ctx.fillStyle = rgba(TEAL, pulse + 0.08);
-        ctx.fillText(meaningText, startX + brandWidth + meaningWidth / 2, textY);
-
+        const mainSize = Math.max(18, Math.min(32, dSize * 0.13));
+        ctx.font = `italic 300 ${mainSize}px "Plus Jakarta Sans", sans-serif`;
+        ctx.letterSpacing = `${mainSize * 0.04}px`;
+        const textY = dBottom + gap;
+        const grad = ctx.createLinearGradient(cx - mainSize * 3, textY, cx + mainSize * 3, textY + mainSize);
+        grad.addColorStop(0, `rgb(${CYAN.r},${CYAN.g},${CYAN.b})`);
+        grad.addColorStop(1, `rgb(${EMERALD.r},${EMERALD.g},${EMERALD.b})`);
+        ctx.fillStyle = grad;
+        ctx.fillText('Digital Elixir', cx, textY);
         ctx.restore();
       }
 
+      // ── Draw: background glow ──
+      function drawGlow(t) {
+        const breathe = 1 + 0.06 * Math.sin(t * 0.7);
+        const r = dSize * 0.6 * breathe;
+        const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+        g.addColorStop(0, rgba(TEAL, 0.02));
+        g.addColorStop(0.6, rgba(CYAN, 0.008));
+        g.addColorStop(1, 'transparent');
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // ── Main loop ──
       function animate(time) {
+        if (startTime === null) startTime = time;
+        const elapsed = (time - startTime) * 0.001;
         const t = time * 0.001;
+
         ctx.clearRect(0, 0, W, H);
-
-        drawAmbient();
-        drawRipples(t);
+        drawGlow(t);
+        update(elapsed, t);
         drawSeeds(t);
-        drawOrigin(t);
+        drawRipples(t);
+        drawDShape();
+        drawParticles(t);
         drawBrandText(t);
-
-        // Spawn ripple every ~3 seconds
-        frameCount++;
-        if (frameCount % 180 === 0) spawnRipple();
 
         animId = requestAnimationFrame(animate);
       }
 
-      resize();
-      window.addEventListener('resize', resize);
-
-      // Start with one ripple already in progress
-      spawnRipple();
+      setup();
+      spawnRipple();  // start with one ripple already going
+      window.addEventListener('resize', function() { setup(); });
       animId = requestAnimationFrame(animate);
     })();
 
@@ -3960,7 +4236,7 @@
           const agentMsg = document.createElement('div');
           agentMsg.className = 'chat-msg agent';
           const responses = {
-            'Our services': 'We offer four interconnected stages that form the complete agent lifecycle — <b>Context first. Secure by design. Assured at scale.</b><br><br><b>01 — Context Engineering</b> — We start by layering System, Domain, Task, Interaction, and Response context. Intelligence before code.<br><br><b>02 — Agent Engineering</b> — Design and build multi-agent systems using ReAct reasoning, CoT, and MCP tool integration.<br><br><b>03 — Agent Security</b> — Prompt injection defense, data protection, access control, and runtime guardrails. Security as a dedicated lifecycle stage.<br><br><b>04 — AI Assurance</b> — Validate reliability with RAGAS, SHAP explainability, bias detection, and trustworthiness metrics.<div class="reasoning">Retrieved from: company knowledge base → 4-pillar service taxonomy → generated summary</div>',
+            'Our services': 'We offer four interconnected stages that form the complete agent lifecycle — <b>Context first. Secure by design. Assured at scale.</b><br><br><b>01 — Context Engineering</b> — We start by layering System, Domain, Task, Interaction, and Response context. Intelligence before code.<br><br><b>02 — Agent Engineering</b> — Design and build multi-agent systems using ReAct reasoning, CoT, and MCP tool integration.<br><br><b>03 — Agent Security</b> — Prompt injection defense, data protection, access control, and runtime guardrails. Security as a dedicated lifecycle stage.<br><br><b>04 — AI Assurance</b> — Validate reliability with RAGAS, agent trajectory analysis, bias detection, and trustworthiness metrics.<div class="reasoning">Retrieved from: company knowledge base → 4-pillar service taxonomy → generated summary</div>',
             'Solution blueprints': 'We have two solution blueprints that demonstrate our 4-pillar lifecycle in action:<br><br><b>Appointment Intelligence</b> (Healthcare) — Multi-agent scheduling system with Supervisor + 3 worker agents (Intake, Scheduling, Notification). MCP integrations with EHR, Calendar API, and SMS Gateway. HIPAA-compliant guardrails throughout.<br><br><b>First-Gen College Navigator</b> (Education) — Multilingual AI navigator for underserved students. Eligibility matching, document tracking, and step-by-step counseling — with bias detection to ensure equitable recommendations.<br><br><a href="#blueprints" style="color:var(--cyan)">View the blueprints &rarr;</a><div class="reasoning">Retrieved from: solution blueprints database → architecture summaries → 4-pillar mapping</div>',
             'My use case': 'I\'d love to help! To recommend the right approach, could you share:<br><br>1. What\'s your current AI maturity? (No agents / Basic / Multi-agent)<br>2. What problem are you looking to solve?<br>3. What systems need to be integrated?<div class="reasoning">Initiating: Service Recommendation Agent → Step 1: Assess maturity → Step 2: Map requirements → Step 3: Generate recommendation</div>',
           };

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head><title>Extract Logo D Mask</title></head>
+<body>
+<h2>Logo D Mask Extractor</h2>
+<p>This tool extracts normalized particle positions from the logo image.</p>
+<canvas id="c" style="border:1px solid #ccc"></canvas>
+<pre id="output" style="max-height:400px;overflow:auto;background:#f0f0f0;padding:10px;font-size:11px"></pre>
+<script>
+const img = new Image();
+img.onload = function() {
+  const c = document.getElementById('c');
+  const ctx = c.getContext('2d');
+
+  // Draw logo at original size
+  c.width = img.naturalWidth;
+  c.height = img.naturalHeight;
+  ctx.drawImage(img, 0, 0);
+
+  const iw = c.width, ih = c.height;
+  const imgData = ctx.getImageData(0, 0, iw, ih);
+  const d = imgData.data;
+
+  // 1. Find full bounding box
+  let minX = iw, minY = ih, maxX = 0, maxY = 0;
+  for (let y = 0; y < ih; y++) {
+    for (let x = 0; x < iw; x++) {
+      if (d[(y * iw + x) * 4 + 3] > 30) {
+        if (x < minX) minX = x;
+        if (x > maxX) maxX = x;
+        if (y < minY) minY = y;
+        if (y > maxY) maxY = y;
+      }
+    }
+  }
+
+  // 2. Find where D symbol ends and text begins (scan for empty rows)
+  let dBottom = maxY;
+  for (let y = minY + Math.floor((maxY - minY) * 0.55); y < maxY; y++) {
+    let rowPixels = 0;
+    for (let x = minX; x <= maxX; x++) {
+      if (d[(y * iw + x) * 4 + 3] > 30) rowPixels++;
+    }
+    if (rowPixels === 0) { dBottom = y; break; }
+  }
+
+  // D symbol bounds
+  const dX = minX, dY = minY, dW = maxX - minX, dH = dBottom - minY;
+  console.log(`D symbol: x=${dX} y=${dY} w=${dW} h=${dH}`);
+
+  // 3. Sample the D symbol at a grid and output normalized filled positions
+  // We want to know which grid cells are FILLED (part of logo D)
+  // Normalized: 0-1 range within the D bounding box
+  const gridSize = 100; // 100x100 grid
+  const mask = [];
+
+  for (let gy = 0; gy < gridSize; gy++) {
+    for (let gx = 0; gx < gridSize; gx++) {
+      // Map grid cell to image pixel
+      const px = Math.round(dX + (gx / gridSize) * dW);
+      const py = Math.round(dY + (gy / gridSize) * dH);
+
+      // Sample a small area around this point
+      let filledCount = 0;
+      const sampleR = Math.max(1, Math.round(dW / gridSize / 2));
+      let totalSamples = 0;
+      for (let sy = -sampleR; sy <= sampleR; sy++) {
+        for (let sx = -sampleR; sx <= sampleR; sx++) {
+          const spx = px + sx, spy = py + sy;
+          if (spx >= 0 && spx < iw && spy >= 0 && spy < ih) {
+            totalSamples++;
+            if (d[(spy * iw + spx) * 4 + 3] > 30) filledCount++;
+          }
+        }
+      }
+
+      // Mark as filled if >40% of samples are filled
+      if (filledCount / totalSamples > 0.4) {
+        mask.push(1);
+      } else {
+        mask.push(0);
+      }
+    }
+  }
+
+  // 4. Output as compact string (100x100 = 10000 chars of 0/1)
+  const maskStr = mask.join('');
+
+  // Also compute a visual preview
+  const previewC = document.createElement('canvas');
+  previewC.width = gridSize; previewC.height = gridSize;
+  const pctx = previewC.getContext('2d');
+  const pImgData = pctx.createImageData(gridSize, gridSize);
+  for (let i = 0; i < mask.length; i++) {
+    const idx = i * 4;
+    pImgData.data[idx] = mask[i] ? 76 : 0;
+    pImgData.data[idx+1] = mask[i] ? 201 : 0;
+    pImgData.data[idx+2] = mask[i] ? 208 : 0;
+    pImgData.data[idx+3] = mask[i] ? 255 : 0;
+  }
+  pctx.putImageData(pImgData, 0, 0);
+  document.body.appendChild(previewC);
+  previewC.style.cssText = 'width:300px;height:300px;image-rendering:pixelated;border:1px solid red;display:block;margin:10px 0';
+
+  // Output the mask string
+  const out = document.getElementById('output');
+  out.textContent = `// Logo D mask: ${gridSize}x${gridSize} grid, 1=filled 0=empty\n`;
+  out.textContent += `// D bounds in image: x=${dX} y=${dY} w=${dW} h=${dH}\n`;
+  out.textContent += `const LOGO_MASK_SIZE = ${gridSize};\n`;
+  out.textContent += `const LOGO_MASK = '${maskStr}';\n`;
+  out.textContent += `\n// Filled cells: ${mask.filter(v=>v).length} / ${mask.length}`;
+
+  console.log('Filled:', mask.filter(v=>v).length, '/', mask.length);
+  console.log('Mask string length:', maskStr.length);
+};
+img.src = '../image/logo/logo-dark-orig.png';
+</script>
+</body>
+</html>
