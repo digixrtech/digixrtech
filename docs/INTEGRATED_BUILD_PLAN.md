@@ -9,9 +9,7 @@ This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEAR
 ### Completed
 - [x] Step 0: CLAUDE.md, Next.js 15 scaffold, folder structure, dependencies
 - [x] Step 1: Layout shell — Navbar, Footer, globals.css, fonts, `.claude/rules/components.md`
-
-### Not Started
-- [ ] Step 2: Hero Section + Agent Network Canvas
+- [x] Step 2: Hero Section + Agent Network Canvas (desktop verified, mobile responsiveness deferred to Step 8)
 - [ ] Step 3: Services Section
 - [ ] Step 4: Clients + Blueprints Section
 - [ ] Step 5: Purpose Section + Ripple Field Canvas
@@ -59,13 +57,15 @@ This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEAR
 
 ## Step 2: Hero Section + Agent Network Canvas
 
-**Status:** Not started
+**Status:** Complete
 **Sessions:** ~1-2
 
 **Build:**
 - `src/components/sections/HeroSection.tsx` — headline, subtext, CTAs, light background
 - `src/lib/canvas/agent-network.ts` — extract canvas animation as pure JS module
 - Mount canvas via `useRef` + `useEffect`, cleanup on unmount
+
+**Note:** Mobile responsive sizing needs review — hero content is too large relative to canvas nodes on small screens. Fix in mockup first, then sync code. Deferred to Step 8.
 
 **Claude Code skills:**
 - **Explore subagents** — launch 2 in parallel:
