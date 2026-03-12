@@ -2,16 +2,24 @@
 
 ## Overview
 
-This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEARNING_PLAN.md` (how to learn Claude Code) into a single actionable reference. Each step pairs a build deliverable with Claude Code skills to practice.
+This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEARNING_PLAN.md` (how to learn Claude Code) into a single actionable reference. Each step has a **unified checklist** — build and learning tasks are treated equally. **Do not mark a step complete until ALL checkboxes are checked.**
 
-## Current State (as of 2026-03-09)
+## Current State (as of 2026-03-11)
 
 ### Completed
 - [x] Step 0: CLAUDE.md, Next.js 15 scaffold, folder structure, dependencies
-- [x] Step 1: Layout shell — Navbar, Footer, globals.css, fonts, `.claude/rules/components.md`
-- [x] Step 2: Hero Section + Agent Network Canvas (desktop verified, mobile responsiveness deferred to Step 8)
+- [x] Step 1: Layout shell — Navbar, Footer, globals.css, fonts
+- [x] Step 2: Hero Section + Agent Network Canvas (mobile responsiveness deferred to Step 8)
 - [x] Step 3: Services Section (lifecycle bar, service panels, offerings accordion, 4 canvas viz, river dividers)
 - [x] Step 4: Clients + Blueprints Section (logo grid, tabbed blueprints, canvas viz, pipeline steps)
+
+### Pending learnings from completed steps
+> **CATCH-UP REQUIRED** — these learning tasks were skipped and must be done before Step 5 build begins.
+- [x] **CATCH-UP:** Run `/simplify` on ServicesSection, ClientsSection, BlueprintsSection (from Step 3)
+- [ ] **CATCH-UP:** Create `.claude/skills/brand-audit.md` (from Step 3)
+- [ ] **CATCH-UP:** Practice `/rewind` on a safe test change (from Step 4)
+
+### Not started
 - [ ] Step 5: Purpose Section + Ripple Field Canvas
 - [ ] Step 6: Insights Teaser + Discovery Section
 - [ ] Step 7: Chat Widget
@@ -23,12 +31,15 @@ This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEAR
 
 ## Session Workflow (repeat for every step)
 
+> **IMPORTANT:** Claude must prompt the user for each unchecked item before moving to the next step. Do not skip learning tasks.
+
 ```
 1. /plan          → Claude reads mockup section, proposes approach
 2. Review plan    → Refine with specific feedback
 3. Build          → Claude implements, you verify in browser
-4. /commit        → Checkpoint progress
-5. /clear         → Fresh context for next step
+4. Learn          → Complete all learning/setup tasks for this step
+5. /commit        → Checkpoint progress
+6. /clear         → Fresh context for next step
 ```
 
 ---
@@ -36,86 +47,63 @@ This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEAR
 ## Step 1: Complete Layout Shell
 
 **Status:** Complete
-**Sessions:** ~1
 
-**Build:**
-- Finish Navbar scroll behavior to match mockup pixel-for-pixel
-- Finish Footer to match mockup
-- Verify layout.tsx wraps pages correctly
-
-**Claude Code skills:**
-- `/plan` mode — read mockup, design approach, then implement
-- `/commit` after verification
-
-**Setup tasks:**
-- Create `.claude/rules/components.md` with component conventions
-- Update `.claude/settings.json` with auto-approve for safe commands
-
-**Verify:** `pnpm dev` → Navbar renders, Footer renders, scroll behavior works
+### Checklist
+- [x] **BUILD:** Navbar scroll behavior matching mockup pixel-for-pixel
+- [x] **BUILD:** Footer matching mockup
+- [x] **BUILD:** Verify layout.tsx wraps pages correctly
+- [x] **LEARN:** Use `/plan` mode — read mockup, design approach, then implement
+- [x] **LEARN:** Use `/commit` after verification
+- [x] **SETUP:** Create `.claude/rules/components.md` with component conventions
+- [x] **SETUP:** Update `.claude/settings.json` with auto-approve for safe commands
+- [x] **VERIFY:** `pnpm dev` → Navbar renders, Footer renders, scroll behavior works
 
 ---
 
 ## Step 2: Hero Section + Agent Network Canvas
 
 **Status:** Complete
-**Sessions:** ~1-2
 
-**Build:**
-- `src/components/sections/HeroSection.tsx` — headline, subtext, CTAs, light background
-- `src/lib/canvas/agent-network.ts` — extract canvas animation as pure JS module
-- Mount canvas via `useRef` + `useEffect`, cleanup on unmount
+### Checklist
+- [x] **BUILD:** `HeroSection.tsx` — headline, subtext, CTAs, light background
+- [x] **BUILD:** `agent-network.ts` — extract canvas animation as pure TS module
+- [x] **BUILD:** Mount canvas via `useRef` + `useEffect`, cleanup on unmount
+- [x] **LEARN:** Use **Explore subagents** — launch 2 in parallel (mockup HTML + canvas JS)
+- [x] **LEARN:** Use **`@` file references** — reference mockup sections directly
+- [x] **SETUP:** Create `.claude/agents/mockup-checker.md` — custom agent to verify component vs mockup
+- [x] **VERIFY:** Animation runs, scroll transition works, CTAs scroll to sections
 
-**Note:** Mobile responsive sizing needs review — hero content is too large relative to canvas nodes on small screens. Fix in mockup first, then sync code. Deferred to Step 8.
-
-**Claude Code skills:**
-- **Explore subagents** — launch 2 in parallel:
-  - Agent 1: Find Hero HTML/CSS in mockup
-  - Agent 2: Find canvas JS behavior in mockup
-- **`@` file references** — reference mockup sections directly
-
-**Setup tasks:**
-- Create `.claude/agents/mockup-checker.md` — custom agent to verify component vs mockup
-
-**Verify:** Animation runs, scroll transition works, CTAs scroll to sections
+**Note:** Mobile responsive sizing deferred to Step 8 — fix in mockup first, then sync code.
 
 ---
 
 ## Step 3: Services Section
 
-**Status:** Complete
-**Sessions:** ~1-2
+**Status:** Complete (build done, learnings pending — see catch-up list above)
 
-**Build:**
-- `src/components/sections/ServicesSection.tsx` — lifecycle bar, service cards
-- Service cards with expand/collapse behavior
-- Intersection Observer scroll triggers
-
-**Claude Code skills:**
-- `/clear` between Hero and Services (fresh context)
-- `/simplify` after building — review for unnecessary complexity
-
-**Setup tasks:**
-- Create `.claude/skills/brand-audit.md` — skill to verify brand consistency
-
-**Verify:** Scroll-triggered reveals, lifecycle bar follows scroll, cards expand/collapse
+### Checklist
+- [x] **BUILD:** `ServicesSection.tsx` — lifecycle bar, service cards, expand/collapse
+- [x] **BUILD:** 4 canvas visualizations (context/build/secure/assure)
+- [x] **BUILD:** River dividers between service panels
+- [x] **BUILD:** Intersection Observer scroll triggers
+- [x] **LEARN:** `/clear` between Hero and Services (fresh context)
+- [x] **LEARN:** Run `/simplify` after building — review for unnecessary complexity
+- [ ] **SETUP:** Create `.claude/skills/brand-audit.md` — brand consistency skill ⚠️ SKIPPED
+- [x] **VERIFY:** Scroll-triggered reveals, lifecycle bar follows scroll, cards expand/collapse
 
 ---
 
 ## Step 4: Clients + Blueprints Section
 
-**Status:** Complete
-**Sessions:** ~1
+**Status:** Complete (build done, learnings pending — see catch-up list above)
 
-**Build:**
-- `src/components/sections/ClientsSection.tsx` — client logos row
-- `src/components/sections/BlueprintsSection.tsx` — tabs, blueprint cards, demo links
-- `src/lib/canvas/viz-blueprint.ts` — blueprint network visualization canvas
-
-**Claude Code skills:**
-- `/rewind` — practice recovery if something breaks
-- **Parallel agents** for independent sub-tasks (tabs logic vs card content)
-
-**Verify:** Tab switching works, content renders, demo links navigate correctly
+### Checklist
+- [x] **BUILD:** `ClientsSection.tsx` — client logos row
+- [x] **BUILD:** `BlueprintsSection.tsx` — tabs, blueprint cards, demo links
+- [x] **BUILD:** `viz-blueprint.ts` — blueprint network visualization canvas
+- [ ] **LEARN:** Practice `/rewind` — recovery if something breaks ⚠️ SKIPPED
+- [x] **LEARN:** Use **parallel agents** for independent sub-tasks
+- [x] **VERIFY:** Tab switching works, content renders, demo links navigate correctly
 
 ---
 
@@ -124,18 +112,18 @@ This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEAR
 **Status:** Not started
 **Sessions:** ~1-2
 
-**Build:**
-- `src/components/sections/PurposeSection.tsx` — belief blocks (Vision/Mission/Intent)
-- `src/lib/canvas/ripple-field.ts` — second canvas animation
-- "Digixr. Digital Elixir." title with seed bloom animation
+> **PRE-REQ:** Complete all catch-up items from Steps 3-4 before starting build.
 
-**Claude Code skills:**
-- Create `.claude/rules/canvas.md` — canvas animation conventions
-
-**Setup tasks:**
-- Create `.claude/agents/perf-reviewer.md` — custom agent for performance review
-
-**Verify:** Ripple animation runs, seed bloom works, brand text renders correctly
+### Checklist
+- [x] **CATCH-UP:** Run `/simplify` on existing sections (Step 3)
+- [ ] **CATCH-UP:** Create `.claude/skills/brand-audit.md` (Step 3)
+- [ ] **CATCH-UP:** Practice `/rewind` on a safe test change (Step 4)
+- [ ] **BUILD:** `PurposeSection.tsx` — belief blocks (Vision/Mission/Intent)
+- [ ] **BUILD:** `ripple-field.ts` — ripple field canvas animation
+- [ ] **BUILD:** "Digixr. Digital Elixir." title with seed bloom animation
+- [ ] **LEARN:** Create `.claude/rules/canvas.md` — canvas animation conventions
+- [ ] **SETUP:** Create `.claude/agents/perf-reviewer.md` — custom agent for performance review
+- [ ] **VERIFY:** Ripple animation runs, seed bloom works, brand text renders correctly
 
 ---
 
@@ -144,20 +132,15 @@ This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEAR
 **Status:** Not started
 **Sessions:** ~2
 
-**Build:**
-- `src/components/sections/InsightsTeaser.tsx` — article cards
-- `src/components/sections/DiscoverySection.tsx` — guided discovery agent flow
-- `src/lib/discovery-flow.ts` — conversation logic
-- `src/lib/data/architecture-templates.ts` — template data
-
-**Claude Code skills:**
-- `/compact` — long session, compact with focus directive
-- `/rename` — name session for `/resume` later
-
-**Setup tasks:**
-- Create `.claude/agents/a11y-checker.md` — accessibility checker agent
-
-**Verify:** Full discovery flow works (industry → challenge → proposal → lead form)
+### Checklist
+- [ ] **BUILD:** `InsightsTeaser.tsx` — article cards
+- [ ] **BUILD:** `DiscoverySection.tsx` — guided discovery agent flow
+- [ ] **BUILD:** `discovery-flow.ts` — conversation logic
+- [ ] **BUILD:** `architecture-templates.ts` — template data
+- [ ] **LEARN:** Use `/compact` — long session, compact with focus directive
+- [ ] **LEARN:** Use `/rename` — name session for `/resume` later
+- [ ] **SETUP:** Create `.claude/agents/a11y-checker.md` — accessibility checker agent
+- [ ] **VERIFY:** Full discovery flow works (industry → challenge → proposal → lead form)
 
 ---
 
@@ -166,17 +149,14 @@ This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEAR
 **Status:** Not started
 **Sessions:** ~1
 
-**Build:**
-- `src/components/ChatWidget.tsx` — floating chat, portal rendering, quick actions
-- Toggle open/close, message rendering
-
-**Claude Code skills:**
-- Set up **hooks** — auto-format with Prettier after edits (PostToolUse hook)
-
-**Setup tasks:**
-- Create `.claude/rules/api.md` — API/security conventions for later phases
-
-**Verify:** Toggle open/close, messages render, quick actions work
+### Checklist
+- [ ] **BUILD:** `ChatWidget.tsx` — floating chat, portal rendering, quick actions
+- [ ] **BUILD:** Toggle open/close, message rendering
+- [ ] **LEARN:** Set up **hooks** — auto-format with Prettier after edits (PostToolUse hook)
+- [ ] **LEARN:** Set up **hooks** — block force push (PreToolUse hook)
+- [ ] **LEARN:** Set up **hooks** — desktop notification when task completes
+- [ ] **SETUP:** Create `.claude/rules/api.md` — API/security conventions for later phases
+- [ ] **VERIFY:** Toggle open/close, messages render, quick actions work
 
 ---
 
@@ -185,20 +165,15 @@ This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEAR
 **Status:** Not started
 **Sessions:** ~1-2
 
-**Build:**
-- Scroll-driven background color interpolation (light #FAFCFD → dark #0a0a12)
-- Section reveal animations via Intersection Observer
-- Navbar color interpolation on scroll
-- Mobile responsiveness pass
-
-**Claude Code skills:**
-- `/batch` for multi-file polish edits
-- **Worktrees** — experiment with animation variants in isolation
-
-**Setup tasks:**
-- Add **Playwright MCP** server for visual testing
-
-**Verify:** Smooth transitions, mobile responsive, Lighthouse 90+ performance
+### Checklist
+- [ ] **BUILD:** Scroll-driven background color interpolation (light #FAFCFD → dark #0a0a12)
+- [ ] **BUILD:** Section reveal animations via Intersection Observer
+- [ ] **BUILD:** Navbar color interpolation on scroll
+- [ ] **BUILD:** Mobile responsiveness pass (including Hero deferred from Step 2)
+- [ ] **LEARN:** Use `/batch` for multi-file polish edits
+- [ ] **LEARN:** Use **worktrees** — experiment with animation variants in isolation
+- [ ] **SETUP:** Add **Playwright MCP** server for visual testing
+- [ ] **VERIFY:** Smooth transitions, mobile responsive, Lighthouse 90+ performance
 
 ---
 
@@ -207,16 +182,13 @@ This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEAR
 **Status:** Not started
 **Sessions:** ~1
 
-**Build:**
-- `src/app/insights/page.tsx` — insights listing
-- `src/app/blueprint-demo/healthcare/page.tsx`
-- `src/app/blueprint-demo/education/page.tsx`
-
-**Claude Code skills:**
-- `/resume` — continue from previous session
-- PR review workflow
-
-**Verify:** Navigation between pages, shared layout works, content matches mockups
+### Checklist
+- [ ] **BUILD:** `src/app/insights/page.tsx` — insights listing
+- [ ] **BUILD:** `src/app/blueprint-demo/healthcare/page.tsx`
+- [ ] **BUILD:** `src/app/blueprint-demo/education/page.tsx`
+- [ ] **LEARN:** Use `/resume` — continue from previous session
+- [ ] **LEARN:** PR review workflow
+- [ ] **VERIFY:** Navigation between pages, shared layout works, content matches mockups
 
 ---
 
@@ -225,20 +197,15 @@ This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEAR
 **Status:** Not started
 **Sessions:** ~1
 
-**Build:**
-- Push to GitHub
-- Connect repo to Vercel
-- Configure domain
-- Tag `v1.0.0-static`
-
-**Claude Code skills:**
-- PR creation via Claude (`gh pr create`)
-- Git integration workflow
-
-**Setup tasks:**
-- Add **Vercel MCP** server
-
-**Verify:** Production build succeeds, all pages work, animations smooth, Lighthouse 90+
+### Checklist
+- [ ] **BUILD:** Push to GitHub
+- [ ] **BUILD:** Connect repo to Vercel
+- [ ] **BUILD:** Configure domain
+- [ ] **BUILD:** Tag `v1.0.0-static`
+- [ ] **LEARN:** PR creation via Claude (`gh pr create`)
+- [ ] **LEARN:** Git integration workflow
+- [ ] **SETUP:** Add **Vercel MCP** server
+- [ ] **VERIFY:** Production build succeeds, all pages work, animations smooth, Lighthouse 90+
 
 ---
 
@@ -250,12 +217,11 @@ This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEAR
 - [ ] `.claude/rules/api.md` — API/security conventions (Step 7)
 
 ### Custom Agents (create during build)
-- [ ] `.claude/agents/mockup-checker.md` — verify component vs mockup (Step 2)
+- [x] `.claude/agents/mockup-checker.md` — verify component vs mockup (Step 2)
 - [ ] `.claude/agents/perf-reviewer.md` — performance review (Step 5)
 - [ ] `.claude/agents/a11y-checker.md` — accessibility checker (Step 6)
 
 ### Custom Skills (create during build)
-- [ ] `.claude/skills/check-mockup.md` — mockup fidelity check (Step 2)
 - [ ] `.claude/skills/brand-audit.md` — brand consistency audit (Step 3)
 
 ### Hooks (set up during build)

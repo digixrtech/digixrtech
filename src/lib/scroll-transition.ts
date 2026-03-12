@@ -8,7 +8,9 @@ const LIGHT = { r: 250, g: 252, b: 253 };
 const DARK = { r: 10, g: 10, b: 18 };
 
 export function initScrollTransition(): () => void {
-  let rafId: number;
+  let rafId = 0;
+  let dirty = true;
+  let lastEased = -1;
 
   // Cache DOM elements once they're available
   let heroSection: HTMLElement | null = null;
@@ -35,8 +37,18 @@ export function initScrollTransition(): () => void {
     return true;
   }
 
+  function onScroll() {
+    if (!dirty) {
+      dirty = true;
+      rafId = requestAnimationFrame(update);
+    }
+  }
+
   function update() {
+    dirty = false;
+
     if (!cached && !cacheElements()) {
+      dirty = true;
       rafId = requestAnimationFrame(update);
       return;
     }
@@ -47,6 +59,11 @@ export function initScrollTransition(): () => void {
 
     const rawProgress = Math.min(1, scrolled / heroH);
     const eased = rawProgress * rawProgress;
+
+    // Skip DOM writes if eased value hasn't changed
+    const roundedEased = Math.round(eased * 1000);
+    if (roundedEased === lastEased) return;
+    lastEased = roundedEased;
 
     // Unified background color — body and hero
     const bgR = lerp(LIGHT.r, DARK.r, eased);
@@ -108,11 +125,14 @@ export function initScrollTransition(): () => void {
       badge.style.borderColor = `rgba(76,201,208,${0.2 + eased * 0.1})`;
       badge.style.color = `rgb(${lerp(43, 120, eased)},${lerp(168, 210, eased)},${lerp(176, 220, eased)})`;
     }
-
-    rafId = requestAnimationFrame(update);
   }
 
+  window.addEventListener('scroll', onScroll, { passive: true });
+  // Initial update
   rafId = requestAnimationFrame(update);
 
-  return () => cancelAnimationFrame(rafId);
+  return () => {
+    cancelAnimationFrame(rafId);
+    window.removeEventListener('scroll', onScroll);
+  };
 }

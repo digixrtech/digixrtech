@@ -1,4 +1,4 @@
-import { type Color, TEAL, EMERALD, WHITE, rgba, isInView } from './utils';
+import { type Color, TEAL, EMERALD, AMBER, WHITE, rgba, isInView } from './utils';
 
 interface Gate {
   label: string;
@@ -129,7 +129,7 @@ export function initVizAssure(
         if (pk.gate === gi && Math.abs(pk.y - gates[gi].y) < 4) {
           pk.gate = gi + 1;
           pk.passed = Math.random() > 0.1;
-          if (!pk.passed) { pk.color = { r: 255, g: 180, b: 50 }; }
+          if (!pk.passed) { pk.color = AMBER; }
           else { pk.color = EMERALD; }
         }
       }

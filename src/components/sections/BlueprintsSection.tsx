@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect, useState, useCallback, type ReactNode } from 'react';
+import { useRef, useEffect, useState, type ReactNode } from 'react';
 import { initBlueprintViz } from '@/lib/canvas/viz-blueprint';
 
 type BlueprintKey = 'healthcare' | 'education';
@@ -105,9 +105,6 @@ export function BlueprintsSection() {
     education: null,
   });
 
-  const switchBlueprint = useCallback((key: BlueprintKey) => {
-    setActiveTab(key);
-  }, []);
 
   // Canvas initialization
   useEffect(() => {
@@ -149,7 +146,7 @@ export function BlueprintsSection() {
             key={bp.key}
             className={`blueprint-tab${activeTab === bp.key ? ' active' : ''}`}
             data-bp={bp.key}
-            onClick={() => switchBlueprint(bp.key)}
+            onClick={() => setActiveTab(bp.key)}
           >
             {tabIcons[bp.tabIcon]}
             <span>{bp.tabTitle}</span>

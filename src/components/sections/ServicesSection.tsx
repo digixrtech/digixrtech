@@ -103,10 +103,11 @@ export function ServicesSection() {
   });
 
   const toggleOffering = useCallback((serviceKey: ServiceKey, highlight: string) => {
-    setActiveOfferings(prev => ({
-      ...prev,
-      [serviceKey]: prev[serviceKey] === highlight ? null : highlight,
-    }));
+    setActiveOfferings(prev => {
+      const newVal = prev[serviceKey] === highlight ? null : highlight;
+      highlightRefs.current[serviceKey].current = newVal;
+      return { ...prev, [serviceKey]: newVal };
+    });
   }, []);
 
   const scrollToService = useCallback((service: ServiceKey) => {
@@ -184,13 +185,6 @@ export function ServicesSection() {
     reveals.forEach(el => observer.observe(el));
     return () => observer.disconnect();
   }, []);
-
-  // Sync hover highlight refs
-  useEffect(() => {
-    for (const key of SERVICES) {
-      highlightRefs.current[key].current = activeOfferings[key];
-    }
-  }, [activeOfferings]);
 
   return (
     <section className="services-section" id="services" ref={sectionRef}>

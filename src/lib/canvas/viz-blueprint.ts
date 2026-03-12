@@ -1,4 +1,4 @@
-import { Color, CYAN, TEAL, EMERALD, AMBER, rgba, quadBezier } from './utils';
+import { Color, CYAN, TEAL, EMERALD, AMBER, rgba, quadBezier, isInView } from './utils';
 
 interface BpNode {
   label: string;
@@ -24,7 +24,7 @@ interface BlueprintConfig {
 
 const MAX_PARTICLES = 30;
 
-export const blueprintConfigs: Record<string, BlueprintConfig> = {
+const blueprintConfigs: Record<string, BlueprintConfig> = {
   healthcare: {
     color: { r: 239, g: 68, b: 68 },
     accentColors: [CYAN, TEAL, EMERALD],
@@ -193,6 +193,7 @@ export function initBlueprintViz(canvas: HTMLCanvasElement, key: string): () => 
   }
 
   function animate(time: number) {
+    if (!isInView(canvas)) { rafId = requestAnimationFrame(animate); return; }
     ctx!.clearRect(0, 0, W, H);
     config.edges.forEach(e => drawEdge(e));
     config.nodes.forEach(n => drawNode(n, time));
@@ -211,13 +212,12 @@ export function initBlueprintViz(canvas: HTMLCanvasElement, key: string): () => 
     rafId = requestAnimationFrame(animate);
   }
 
-  function onResize() { resize(); }
-  window.addEventListener('resize', onResize);
+  window.addEventListener('resize', resize);
   resize();
   rafId = requestAnimationFrame(animate);
 
   return () => {
     cancelAnimationFrame(rafId);
-    window.removeEventListener('resize', onResize);
+    window.removeEventListener('resize', resize);
   };
 }
