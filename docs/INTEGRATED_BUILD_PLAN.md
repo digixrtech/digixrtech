@@ -4,7 +4,7 @@
 
 This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEARNING_PLAN.md` (how to learn Claude Code) into a single actionable reference. Each step has a **unified checklist** — build and learning tasks are treated equally. **Do not mark a step complete until ALL checkboxes are checked.**
 
-## Current State (as of 2026-03-11)
+## Current State (as of 2026-03-12)
 
 ### Completed
 - [x] Step 0: CLAUDE.md, Next.js 15 scaffold, folder structure, dependencies
@@ -16,7 +16,9 @@ This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEAR
 ### Pending learnings from completed steps
 > **CATCH-UP REQUIRED** — these learning tasks were skipped and must be done before Step 5 build begins.
 - [x] **CATCH-UP:** Run `/simplify` on ServicesSection, ClientsSection, BlueprintsSection (from Step 3)
-- [ ] **CATCH-UP:** Create `.claude/skills/brand-audit.md` (from Step 3)
+- [ ] **CATCH-UP:** Create `/mockup-extract` skill (replaces brand-audit — see Step 3)
+- [ ] **CATCH-UP:** Create `/perf-check` skill (canvas performance audit — see Step 3)
+- [ ] **CATCH-UP:** Install marketplace plugins: `typescript-lsp`, `commit-commands` (via `/plugin`)
 - [ ] **CATCH-UP:** Practice `/rewind` on a safe test change (from Step 4)
 
 ### Not started
@@ -88,7 +90,9 @@ This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEAR
 - [x] **BUILD:** Intersection Observer scroll triggers
 - [x] **LEARN:** `/clear` between Hero and Services (fresh context)
 - [x] **LEARN:** Run `/simplify` after building — review for unnecessary complexity
-- [ ] **SETUP:** Create `.claude/skills/brand-audit.md` — brand consistency skill ⚠️ SKIPPED
+- [ ] **SETUP:** Create `/mockup-extract` skill — 7-category section extraction workflow ⚠️ REPLACED brand-audit
+- [ ] **SETUP:** Create `/perf-check` skill — canvas performance audit ⚠️ ADDED
+- [ ] **SETUP:** Install marketplace plugins: `typescript-lsp`, `commit-commands` ⚠️ ADDED
 - [x] **VERIFY:** Scroll-triggered reveals, lifecycle bar follows scroll, cards expand/collapse
 
 ---
@@ -116,12 +120,15 @@ This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEAR
 
 ### Checklist
 - [x] **CATCH-UP:** Run `/simplify` on existing sections (Step 3)
-- [ ] **CATCH-UP:** Create `.claude/skills/brand-audit.md` (Step 3)
+- [ ] **CATCH-UP:** Create `/mockup-extract` skill (replaces brand-audit — Step 3)
+- [ ] **CATCH-UP:** Create `/perf-check` skill (canvas perf audit — Step 3)
+- [ ] **CATCH-UP:** Install marketplace plugins: `typescript-lsp`, `commit-commands` (Step 3)
 - [ ] **CATCH-UP:** Practice `/rewind` on a safe test change (Step 4)
 - [ ] **BUILD:** `PurposeSection.tsx` — belief blocks (Vision/Mission/Intent)
 - [ ] **BUILD:** `ripple-field.ts` — ripple field canvas animation
 - [ ] **BUILD:** "Digixr. Digital Elixir." title with seed bloom animation
 - [ ] **LEARN:** Create `.claude/rules/canvas.md` — canvas animation conventions
+- [ ] **LEARN:** Run `/perf-check` on ripple-field.ts after building
 - [ ] **SETUP:** Create `.claude/agents/perf-reviewer.md` — custom agent for performance review
 - [ ] **VERIFY:** Ripple animation runs, seed bloom works, brand text renders correctly
 
@@ -222,7 +229,14 @@ This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEAR
 - [ ] `.claude/agents/a11y-checker.md` — accessibility checker (Step 6)
 
 ### Custom Skills (create during build)
-- [ ] `.claude/skills/brand-audit.md` — brand consistency audit (Step 3)
+- [ ] `.claude/skills/mockup-extract/SKILL.md` — 7-category section extraction workflow (Step 3 catch-up)
+- [ ] `.claude/skills/perf-check/SKILL.md` — canvas performance audit (Step 3 catch-up)
+
+### Marketplace Plugins (install during build)
+- [ ] `typescript-lsp` — TypeScript type checking & diagnostics (Step 3 catch-up, user scope)
+- [ ] `commit-commands` — git commit/push/PR workflows (Step 3 catch-up, project scope)
+- [ ] `github` — PR creation, issue tracking (Step 10, user scope)
+- [ ] `vercel` — deployment management (Step 10, project scope)
 
 ### Hooks (set up during build)
 - [ ] PostToolUse: Auto-format with Prettier after Edit/Write (Step 7)
@@ -250,6 +264,38 @@ This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEAR
 | `/rename "step-N-name"` | Name important sessions |
 | `/resume` | Continue previous work |
 | `/simplify` | After building components |
+
+---
+
+## Phase 2: LangGraph/LangChain Agent Development (Future)
+
+> Create these skills and rules when Python agent development begins.
+
+### Custom Skills (Phase 2)
+- [ ] `.claude/skills/langgraph-scaffold/SKILL.md` — generate agent graph boilerplate (State, nodes, edges, checkpointer, tests)
+- [ ] `.claude/skills/test-agent/SKILL.md` — create test harness (InMemorySaver, interrupt_before, mock tools, state validation)
+- [ ] `.claude/skills/audit-graph/SKILL.md` — validate graph against production best practices
+
+### Rules (Phase 2)
+- [ ] `.claude/rules/langgraph.md` — LangGraph conventions:
+  - State must use TypedDict/Pydantic (not raw dicts)
+  - No print() — structured logging only (logging.getLogger + JSON)
+  - Supervisor agents explicitly list subagents
+  - All nodes must have error handling
+  - LangSmith instrumentation required for production
+  - State size tracked (warn if >100KB per execution)
+  - Node names must be descriptive (`validate_user_input` not `step1`)
+
+### Key Patterns to Enforce
+- **Subagents pattern** — supervisor coordinates specialized stateless subagents
+- **Human-in-the-loop** — `interrupt_before` for critical decision gates
+- **Testing** — InMemorySaver checkpointer, test individual nodes via `graph.nodes`, mock tools
+- **Context engineering** — each agent sees only the information it needs
+
+### Marketplace Plugins (Phase 2)
+- [ ] `pyright-lsp` — Python type checking (user scope)
+- [ ] `sentry` — error tracking (project scope)
+- [ ] `supabase` — database (project scope)
 
 ---
 
