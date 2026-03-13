@@ -3,6 +3,8 @@ import { ServicesSection } from '@/components/sections/ServicesSection';
 import { ClientsSection } from '@/components/sections/ClientsSection';
 import { BlueprintsSection } from '@/components/sections/BlueprintsSection';
 import { PurposeSection } from '@/components/sections/PurposeSection';
+import { InsightsSection } from '@/components/sections/InsightsSection';
+import { DiscoverySection } from '@/components/sections/DiscoverySection';
 
 export default function HomePage() {
   return (
@@ -12,19 +14,8 @@ export default function HomePage() {
       <ClientsSection />
       <BlueprintsSection />
       <PurposeSection />
-
-      {/* Placeholder sections — will be replaced by real components in later steps */}
-      <section id="cta" style={{ minHeight: '50vh', background: 'var(--dark-bg)', padding: '80px 64px' }}>
-        <div className="section-header">
-          <div className="section-label">Challenge Us</div>
-          <h2 className="section-title">
-            Tell our agent what you&apos;re trying to <span className="gradient">solve.</span>
-          </h2>
-          <p className="section-subtitle">
-            Tell us what you&apos;re solving — our agent will map it to an architecture before you finish your coffee.
-          </p>
-        </div>
-      </section>
+      <InsightsSection />
+      <DiscoverySection />
     </>
   );
 }

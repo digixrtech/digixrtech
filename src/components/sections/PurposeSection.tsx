@@ -50,6 +50,7 @@ const BELIEFS = [
 ] as const;
 
 export function PurposeSection() {
+  const sectionRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -58,8 +59,18 @@ export function PurposeSection() {
     return cleanup;
   }, []);
 
+  useEffect(() => {
+    const reveals = sectionRef.current?.querySelectorAll('.reveal');
+    if (!reveals || reveals.length === 0) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.15 });
+    reveals.forEach(el => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="belief-section" id="purpose">
+    <section className="belief-section" id="purpose" ref={sectionRef}>
       <div className="section-header reveal">
         <div className="section-label">Our Purpose</div>
         <h2 className="section-title">

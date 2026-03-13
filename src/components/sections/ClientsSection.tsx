@@ -1,4 +1,7 @@
+'use client';
+
 import Image from 'next/image';
+import { useRef, useEffect } from 'react';
 
 const clients = [
   { name: 'TimeSmart.AI', industry: 'Healthcare SaaS', logo: '/images/clients/timesmart.png', url: 'https://timesmart.ai/', scale: true },
@@ -9,8 +12,20 @@ const clients = [
 ];
 
 export function ClientsSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const reveals = sectionRef.current?.querySelectorAll('.reveal');
+    if (!reveals || reveals.length === 0) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.15 });
+    reveals.forEach(el => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="clients-section" id="clients">
+    <section className="clients-section" id="clients" ref={sectionRef}>
       <div className="section-header reveal">
         <div className="section-label">Trusted By</div>
         <h2 className="section-title">
