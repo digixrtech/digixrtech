@@ -2,6 +2,7 @@ import { HeroSection } from '@/components/sections/HeroSection';
 import { ServicesSection } from '@/components/sections/ServicesSection';
 import { ClientsSection } from '@/components/sections/ClientsSection';
 import { BlueprintsSection } from '@/components/sections/BlueprintsSection';
+import { PurposeSection } from '@/components/sections/PurposeSection';
 
 export default function HomePage() {
   return (
@@ -10,6 +11,7 @@ export default function HomePage() {
       <ServicesSection />
       <ClientsSection />
       <BlueprintsSection />
+      <PurposeSection />
 
       {/* Placeholder sections — will be replaced by real components in later steps */}
       <section id="cta" style={{ minHeight: '50vh', background: 'var(--dark-bg)', padding: '80px 64px' }}>

@@ -16,13 +16,13 @@ This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEAR
 ### Pending learnings from completed steps
 > **CATCH-UP REQUIRED** — these learning tasks were skipped and must be done before Step 5 build begins.
 - [x] **CATCH-UP:** Run `/simplify` on ServicesSection, ClientsSection, BlueprintsSection (from Step 3)
-- [ ] **CATCH-UP:** Create `/mockup-extract` skill (replaces brand-audit — see Step 3)
-- [ ] **CATCH-UP:** Create `/perf-check` skill (canvas performance audit — see Step 3)
-- [ ] **CATCH-UP:** Install marketplace plugins: `typescript-lsp`, `commit-commands` (via `/plugin`)
-- [ ] **CATCH-UP:** Practice `/rewind` on a safe test change (from Step 4)
+- [x] **CATCH-UP:** Create `/mockup-extract` skill (replaces brand-audit — see Step 3)
+- [x] **CATCH-UP:** Create `/perf-check` skill (canvas performance audit — see Step 3)
+- [x] ~~**CATCH-UP:** Install marketplace plugins~~ — N/A (Claude Code has no plugin marketplace; replaced with real tooling at respective steps)
+- [x] ~~**CATCH-UP:** Practice `/rewind`~~ — N/A in VS Code extension (CLI-only command)
 
-### Not started
-- [ ] Step 5: Purpose Section + Ripple Field Canvas
+### In progress
+- [ ] Step 5: Purpose Section + Elixir Canvas (all items done, pending commit)
 - [ ] Step 6: Insights Teaser + Discovery Section
 - [ ] Step 7: Chat Widget
 - [ ] Step 8: Scroll Transitions + Polish
@@ -90,9 +90,9 @@ This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEAR
 - [x] **BUILD:** Intersection Observer scroll triggers
 - [x] **LEARN:** `/clear` between Hero and Services (fresh context)
 - [x] **LEARN:** Run `/simplify` after building — review for unnecessary complexity
-- [ ] **SETUP:** Create `/mockup-extract` skill — 7-category section extraction workflow ⚠️ REPLACED brand-audit
-- [ ] **SETUP:** Create `/perf-check` skill — canvas performance audit ⚠️ ADDED
-- [ ] **SETUP:** Install marketplace plugins: `typescript-lsp`, `commit-commands` ⚠️ ADDED
+- [x] **SETUP:** Create `/mockup-extract` skill — 7-category section extraction workflow ⚠️ REPLACED brand-audit
+- [x] **SETUP:** Create `/perf-check` skill — canvas performance audit ⚠️ ADDED
+- [x] ~~**SETUP:** Install marketplace plugins~~ — N/A (not a real Claude Code feature)
 - [x] **VERIFY:** Scroll-triggered reveals, lifecycle bar follows scroll, cards expand/collapse
 
 ---
@@ -105,32 +105,33 @@ This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEAR
 - [x] **BUILD:** `ClientsSection.tsx` — client logos row
 - [x] **BUILD:** `BlueprintsSection.tsx` — tabs, blueprint cards, demo links
 - [x] **BUILD:** `viz-blueprint.ts` — blueprint network visualization canvas
-- [ ] **LEARN:** Practice `/rewind` — recovery if something breaks ⚠️ SKIPPED
+- [x] ~~**LEARN:** Practice `/rewind`~~ — N/A in VS Code extension (CLI-only command). Recovery via `git checkout -- <file>` or VS Code Timeline.
 - [x] **LEARN:** Use **parallel agents** for independent sub-tasks
 - [x] **VERIFY:** Tab switching works, content renders, demo links navigate correctly
 
 ---
 
-## Step 5: Purpose Section + Ripple Field Canvas
+## Step 5: Purpose Section + Elixir Canvas
 
-**Status:** Not started
+**Status:** In progress (build done, learning tasks remaining)
 **Sessions:** ~1-2
 
 > **PRE-REQ:** Complete all catch-up items from Steps 3-4 before starting build.
 
 ### Checklist
 - [x] **CATCH-UP:** Run `/simplify` on existing sections (Step 3)
-- [ ] **CATCH-UP:** Create `/mockup-extract` skill (replaces brand-audit — Step 3)
-- [ ] **CATCH-UP:** Create `/perf-check` skill (canvas perf audit — Step 3)
-- [ ] **CATCH-UP:** Install marketplace plugins: `typescript-lsp`, `commit-commands` (Step 3)
-- [ ] **CATCH-UP:** Practice `/rewind` on a safe test change (Step 4)
-- [ ] **BUILD:** `PurposeSection.tsx` — belief blocks (Vision/Mission/Intent)
-- [ ] **BUILD:** `ripple-field.ts` — ripple field canvas animation
-- [ ] **BUILD:** "Digixr. Digital Elixir." title with seed bloom animation
-- [ ] **LEARN:** Create `.claude/rules/canvas.md` — canvas animation conventions
-- [ ] **LEARN:** Run `/perf-check` on ripple-field.ts after building
-- [ ] **SETUP:** Create `.claude/agents/perf-reviewer.md` — custom agent for performance review
-- [ ] **VERIFY:** Ripple animation runs, seed bloom works, brand text renders correctly
+- [x] **CATCH-UP:** Create `/mockup-extract` skill (replaces brand-audit — Step 3)
+- [x] **CATCH-UP:** Create `/perf-check` skill (canvas perf audit — Step 3)
+- [x] ~~**CATCH-UP:** Install marketplace plugins~~ — N/A (not a real Claude Code feature)
+- [x] ~~**CATCH-UP:** Practice `/rewind`~~ — N/A in VS Code extension (CLI-only). Use git for file recovery.
+- [x] **BUILD:** `PurposeSection.tsx` — belief blocks (Vision/Mission/Intent)
+- [x] **BUILD:** `elixir-animation.ts` — elixir D canvas animation (solid→logo dissolve, ripples, seeds, brand text)
+- [x] **BUILD:** "Digixr. Digital Elixir." title with seed bloom animation
+- [x] **SETUP:** `next-sitemap` — auto-generate sitemap.xml + robots.txt for SEO (installed early, runs on `postbuild`)
+- [x] **LEARN:** Create `.claude/rules/canvas.md` — canvas animation conventions
+- [x] **LEARN:** Run `/perf-check` on elixir-animation.ts — 3 minor issues, no criticals
+- [x] **SETUP:** Create `.claude/agents/perf-reviewer.md` — custom agent for performance review
+- [x] **VERIFY:** Elixir animation runs, seed bloom works, brand text renders, belief blocks match mockup
 
 ---
 
@@ -147,6 +148,7 @@ This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEAR
 - [ ] **LEARN:** Use `/compact` — long session, compact with focus directive
 - [ ] **LEARN:** Use `/rename` — name session for `/resume` later
 - [ ] **SETUP:** Create `.claude/agents/a11y-checker.md` — accessibility checker agent
+- [ ] **SETUP:** Install `@axe-core/playwright` — automated WCAG 2.1 accessibility testing via Playwright MCP
 - [ ] **VERIFY:** Full discovery flow works (industry → challenge → proposal → lead form)
 
 ---
@@ -180,6 +182,8 @@ This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEAR
 - [ ] **LEARN:** Use `/batch` for multi-file polish edits
 - [ ] **LEARN:** Use **worktrees** — experiment with animation variants in isolation
 - [ ] **SETUP:** Add **Playwright MCP** server for visual testing
+- [ ] **SETUP:** Install `@lhci/cli` (Lighthouse CI) — SEO, performance, accessibility scoring
+- [ ] **SETUP:** Install `@next/bundle-analyzer` — visualize bundle size, catch bloat before deploy
 - [ ] **VERIFY:** Smooth transitions, mobile responsive, Lighthouse 90+ performance
 
 ---
@@ -209,6 +213,7 @@ This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEAR
 - [ ] **BUILD:** Connect repo to Vercel
 - [ ] **BUILD:** Configure domain
 - [ ] **BUILD:** Tag `v1.0.0-static`
+- [ ] **BUILD:** Add JSON-LD structured data (Organization schema) to layout for rich search snippets
 - [ ] **LEARN:** PR creation via Claude (`gh pr create`)
 - [ ] **LEARN:** Git integration workflow
 - [ ] **SETUP:** Add **Vercel MCP** server
@@ -220,23 +225,24 @@ This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEAR
 
 ### Rules (create during build)
 - [x] `.claude/rules/components.md` — component conventions (Step 1)
-- [ ] `.claude/rules/canvas.md` — canvas animation conventions (Step 5)
+- [x] `.claude/rules/canvas.md` — canvas animation conventions (Step 5)
 - [ ] `.claude/rules/api.md` — API/security conventions (Step 7)
 
 ### Custom Agents (create during build)
 - [x] `.claude/agents/mockup-checker.md` — verify component vs mockup (Step 2)
-- [ ] `.claude/agents/perf-reviewer.md` — performance review (Step 5)
+- [x] `.claude/agents/perf-reviewer.md` — performance review (Step 5)
 - [ ] `.claude/agents/a11y-checker.md` — accessibility checker (Step 6)
 
 ### Custom Skills (create during build)
-- [ ] `.claude/skills/mockup-extract/SKILL.md` — 7-category section extraction workflow (Step 3 catch-up)
-- [ ] `.claude/skills/perf-check/SKILL.md` — canvas performance audit (Step 3 catch-up)
+- [x] `.claude/skills/mockup-extract/SKILL.md` — 7-category section extraction workflow (Step 3, done)
+- [x] `.claude/skills/perf-check/SKILL.md` — canvas performance audit (Step 3, done)
 
-### Marketplace Plugins (install during build)
-- [ ] `typescript-lsp` — TypeScript type checking & diagnostics (Step 3 catch-up, user scope)
-- [ ] `commit-commands` — git commit/push/PR workflows (Step 3 catch-up, project scope)
-- [ ] `github` — PR creation, issue tracking (Step 10, user scope)
-- [ ] `vercel` — deployment management (Step 10, project scope)
+### SEO / Accessibility / Performance Tooling (install during build)
+- [x] `next-sitemap` — auto-generate sitemap.xml + robots.txt (Step 5, installed)
+- [ ] `@axe-core/playwright` — WCAG 2.1 accessibility testing via Playwright (Step 6)
+- [ ] `@lhci/cli` — Lighthouse CI for SEO, performance, a11y scoring (Step 8)
+- [ ] `@next/bundle-analyzer` — bundle size visualization (Step 8)
+- [ ] JSON-LD structured data (Organization schema) — rich search snippets (Step 10)
 
 ### Hooks (set up during build)
 - [ ] PostToolUse: Auto-format with Prettier after Edit/Write (Step 7)
@@ -258,7 +264,7 @@ This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEAR
 | `/plan` | Before each component |
 | `/commit` | After each working milestone |
 | `/clear` | Between unrelated tasks |
-| `/rewind` | When something goes wrong |
+| `/rewind` | CLI only — in VS Code, use git or Timeline |
 | `/memory` | When Claude seems confused |
 | `/compact "focus on [X]"` | When conversation gets long |
 | `/rename "step-N-name"` | Name important sessions |
@@ -292,10 +298,10 @@ This plan merges `PLATFORM_BUILD_PLAN.md` (what to build) with `CLAUDE_CODE_LEAR
 - **Testing** — InMemorySaver checkpointer, test individual nodes via `graph.nodes`, mock tools
 - **Context engineering** — each agent sees only the information it needs
 
-### Marketplace Plugins (Phase 2)
-- [ ] `pyright-lsp` — Python type checking (user scope)
-- [ ] `sentry` — error tracking (project scope)
-- [ ] `supabase` — database (project scope)
+### MCP Servers & Tooling (Phase 2)
+- [ ] Sentry MCP — error tracking (project scope)
+- [ ] Supabase MCP — database (project scope)
+- [ ] `pyright` — Python type checking (dev dependency)
 
 ---
 
