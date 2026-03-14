@@ -1,14 +1,34 @@
-export type ArticleCategory = 'context' | 'security' | 'assurance' | 'agent' | 'industry';
+import { supabase } from '@/lib/supabase';
+
+export type ArticleCategory = 'context' | 'security' | 'assurance' | 'agent' | 'industry' | 'engineering' | 'leadership' | 'tutorial';
 
 export interface Article {
   id: string;
-  category: ArticleCategory;
-  categoryLabel: string;
+  slug: string;
   title: string;
   excerpt: string;
+  content: string;
+  category: ArticleCategory;
+  category_label: string;
+  author_name: string | null;
+  author_role: string | null;
+  author_bio: string | null;
+  cover_image_url: string | null;
+  published_at: string | null;
+  read_time: number;
+  meta_title: string | null;
+  meta_description: string | null;
+}
+
+export interface ArticleListItem {
+  id: string;
   slug: string;
-  date: string;
-  readTime: string;
+  title: string;
+  excerpt: string;
+  category: ArticleCategory;
+  category_label: string;
+  published_at: string | null;
+  read_time: number;
 }
 
 // Category filter definitions for the insights page
@@ -19,96 +39,138 @@ export const articleFilters: { key: ArticleCategory | 'all'; label: string }[] =
   { key: 'security', label: 'Agent Security' },
   { key: 'assurance', label: 'AI Assurance' },
   { key: 'industry', label: 'Industry' },
+  { key: 'engineering', label: 'Engineering' },
+  { key: 'leadership', label: 'Leadership' },
+  { key: 'tutorial', label: 'Tutorial' },
 ];
 
-// Externalized article data — replace with API fetch in Phase 2
-export const articles: Article[] = [
-  {
-    id: 'context-engineering',
-    category: 'context',
-    categoryLabel: 'Context Engineering',
-    title: 'Context Engineering Is the New Prompt Engineering',
-    excerpt:
-      'Prompt engineering was never enough. The real leverage is in orchestrating the layers of context that surround every agent decision — system, domain, task, and interaction.',
-    slug: 'context-engineering-is-the-new-prompt-engineering',
-    date: 'Feb 28, 2026',
-    readTime: '6 min read',
-  },
-  {
-    id: 'agent-security-blind-spot',
-    category: 'security',
-    categoryLabel: 'Agent Security',
-    title: 'The Agent Security Blind Spot Most Teams Ignore',
-    excerpt:
-      'One prompt injection can undo months of agent engineering. We break down why security must be a dedicated lifecycle stage, not an afterthought bolted on before launch.',
-    slug: 'agent-security-blind-spot-most-teams-ignore',
-    date: 'Feb 15, 2026',
-    readTime: '8 min read',
-  },
-  {
-    id: 'ai-equity-engineering',
-    category: 'assurance',
-    categoryLabel: 'AI Assurance',
-    title: "AI Equity Is Not Optional — It's an Engineering Decision",
-    excerpt:
-      "From hospital scheduling to college navigation, the agents we build encode our values. Bias detection and fairness validation aren't features — they're responsibilities.",
-    slug: 'ai-equity-is-not-optional',
-    date: 'Feb 5, 2026',
-    readTime: '5 min read',
-  },
-  {
-    id: 'multi-agent-orchestration',
-    category: 'agent',
-    categoryLabel: 'Agent Engineering',
-    title: 'From Single Agents to Multi-Agent Orchestration',
-    excerpt:
-      'The jump from one agent to many is not linear. Supervisor patterns, swarm architectures, and MCP tool integration change everything about how you design agent systems.',
-    slug: 'from-single-agents-to-multi-agent-orchestration',
-    date: 'Jan 22, 2026',
-    readTime: '7 min read',
-  },
-  {
-    id: 'agentic-ai-enterprise',
-    category: 'industry',
-    categoryLabel: 'Industry',
-    title: 'How Agentic AI Is Reshaping Enterprise Operations',
-    excerpt:
-      'Beyond chatbots. Real-world examples of autonomous agents transforming scheduling, procurement, and customer service workflows across industries.',
-    slug: 'how-agentic-ai-is-reshaping-enterprise-operations',
-    date: 'Jan 10, 2026',
-    readTime: '6 min read',
-  },
-  {
-    id: 'knowledge-graphs-vs-rag',
-    category: 'context',
-    categoryLabel: 'Context Engineering',
-    title: 'Knowledge Graphs vs. Vector RAG: When to Use What',
-    excerpt:
-      'Both retrieve context, but for very different reasons. A practical guide to choosing the right retrieval strategy for your agent architecture.',
-    slug: 'knowledge-graphs-vs-vector-rag',
-    date: 'Dec 18, 2025',
-    readTime: '9 min read',
-  },
-  {
-    id: 'hipaa-compliant-agents',
-    category: 'security',
-    categoryLabel: 'Agent Security',
-    title: 'Building HIPAA-Compliant AI Agents',
-    excerpt:
-      'Healthcare agents handle the most sensitive data. Here is our security checklist for PHI boundaries, PII redaction, and audit trails in production agent systems.',
-    slug: 'building-hipaa-compliant-ai-agents',
-    date: 'Dec 5, 2025',
-    readTime: '7 min read',
-  },
-  {
-    id: 'hallucination-detection',
-    category: 'assurance',
-    categoryLabel: 'AI Assurance',
-    title: 'Hallucination Detection in Production Agents',
-    excerpt:
-      'Hallucinations are not bugs — they are features of probabilistic systems. Here is how we validate agent outputs at scale using LLM-as-a-Judge pipelines.',
-    slug: 'hallucination-detection-in-production-agents',
-    date: 'Nov 20, 2025',
-    readTime: '8 min read',
-  },
-];
+/** Fetch all published articles for the listing page */
+export async function getArticles(category?: ArticleCategory): Promise<ArticleListItem[]> {
+  let query = supabase
+    .from('articles')
+    .select('id, slug, title, excerpt, category, category_label, published_at, read_time')
+    .eq('published', true)
+    .order('published_at', { ascending: false });
+
+  if (category) {
+    query = query.eq('category', category);
+  }
+
+  const { data, error } = await query;
+
+  if (error) {
+    console.error('Error fetching articles:', error);
+    return [];
+  }
+
+  return (data ?? []) as ArticleListItem[];
+}
+
+/** Fetch a single article by slug (with author info) */
+export async function getArticleBySlug(slug: string): Promise<Article | null> {
+  const { data: articleData, error: articleError } = await supabase
+    .from('articles')
+    .select('id, slug, title, excerpt, content, category, category_label, author_id, cover_image_url, published_at, read_time, meta_title, meta_description')
+    .eq('slug', slug)
+    .eq('published', true)
+    .single();
+
+  if (articleError || !articleData) {
+    return null;
+  }
+
+  // Fetch author separately if author_id exists
+  let authorName: string | null = null;
+  let authorRole: string | null = null;
+  let authorBio: string | null = null;
+
+  if (articleData.author_id) {
+    const { data: authorData } = await supabase
+      .from('authors')
+      .select('name, role, bio')
+      .eq('id', articleData.author_id)
+      .single();
+
+    if (authorData) {
+      authorName = authorData.name;
+      authorRole = authorData.role;
+      authorBio = authorData.bio;
+    }
+  }
+
+  return {
+    id: articleData.id,
+    slug: articleData.slug,
+    title: articleData.title,
+    excerpt: articleData.excerpt,
+    content: articleData.content,
+    category: articleData.category as ArticleCategory,
+    category_label: articleData.category_label,
+    author_name: authorName,
+    author_role: authorRole,
+    author_bio: authorBio,
+    cover_image_url: articleData.cover_image_url,
+    published_at: articleData.published_at,
+    read_time: articleData.read_time,
+    meta_title: articleData.meta_title,
+    meta_description: articleData.meta_description,
+  };
+}
+
+/** Fetch all published article slugs (for generateStaticParams) */
+export async function getAllArticleSlugs(): Promise<string[]> {
+  const { data, error } = await supabase
+    .from('articles')
+    .select('slug')
+    .eq('published', true);
+
+  if (error || !data) return [];
+  return data.map((a) => a.slug);
+}
+
+/** Full-text search articles */
+export async function searchArticles(query: string): Promise<ArticleListItem[]> {
+  const { data, error } = await supabase
+    .rpc('search_articles', { search_query: query });
+
+  if (error) {
+    console.error('Error searching articles:', error);
+    return [];
+  }
+
+  return ((data ?? []) as Array<Record<string, unknown>>).map((row) => ({
+    id: row.id as string,
+    slug: row.slug as string,
+    title: row.title as string,
+    excerpt: row.excerpt as string,
+    category: row.category as ArticleCategory,
+    category_label: row.category_label as string,
+    published_at: row.published_at as string | null,
+    read_time: row.read_time as number,
+  }));
+}
+
+/** Get related articles (same category, excluding current) */
+export async function getRelatedArticles(slug: string, category: ArticleCategory, limit = 3): Promise<ArticleListItem[]> {
+  const { data, error } = await supabase
+    .from('articles')
+    .select('id, slug, title, excerpt, category, category_label, published_at, read_time')
+    .eq('published', true)
+    .eq('category', category)
+    .neq('slug', slug)
+    .order('published_at', { ascending: false })
+    .limit(limit);
+
+  if (error || !data) return [];
+  return data as ArticleListItem[];
+}
+
+/** Format published_at date for display */
+export function formatDate(dateStr: string | null): string {
+  if (!dateStr) return '';
+  return new Date(dateStr).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
+}

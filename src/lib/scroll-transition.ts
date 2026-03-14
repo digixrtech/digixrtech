@@ -134,5 +134,14 @@ export function initScrollTransition(): () => void {
   return () => {
     cancelAnimationFrame(rafId);
     window.removeEventListener('scroll', onScroll);
+    // Reset body background so non-homepage routes aren't affected
+    document.body.style.backgroundColor = '';
+    if (navbar) {
+      navbar.style.background = '';
+      navbar.style.borderBottomColor = '';
+    }
+    for (const link of navLinks) {
+      link.style.color = '';
+    }
   };
 }

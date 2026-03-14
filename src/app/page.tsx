@@ -5,8 +5,11 @@ import { BlueprintsSection } from '@/components/sections/BlueprintsSection';
 import { PurposeSection } from '@/components/sections/PurposeSection';
 import { InsightsSection } from '@/components/sections/InsightsSection';
 import { DiscoverySection } from '@/components/sections/DiscoverySection';
+import { getArticles } from '@/lib/data/articles';
 
-export default function HomePage() {
+export default async function HomePage() {
+  const articles = await getArticles();
+
   return (
     <>
       <HeroSection />
@@ -14,7 +17,7 @@ export default function HomePage() {
       <ClientsSection />
       <BlueprintsSection />
       <PurposeSection />
-      <InsightsSection />
+      <InsightsSection articles={articles.slice(0, 3)} />
       <DiscoverySection />
     </>
   );

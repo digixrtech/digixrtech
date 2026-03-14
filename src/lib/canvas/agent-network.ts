@@ -111,8 +111,8 @@ export function initAgentNetwork(canvas: HTMLCanvasElement): () => void {
     const cx = heroW / 2;
     const cy = heroH / 2;
     const isMobile = heroW < 768;
-    const rX = isMobile ? heroW * 0.35 : Math.min(heroW * 0.4, 480);
-    const rY = isMobile ? heroH * 0.32 : Math.min(heroH * 0.38, 360);
+    const rX = isMobile ? heroW * 0.48 : Math.min(heroW * 0.4, 480);
+    const rY = isMobile ? heroH * 0.42 : Math.min(heroH * 0.38, 360);
 
     for (let i = 0; i < agentTypes.length; i++) {
       const angle = -Math.PI * 0.35 + ((Math.PI * 2) / agentTypes.length) * i;

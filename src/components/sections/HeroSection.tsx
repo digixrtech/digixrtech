@@ -27,13 +27,14 @@ export function HeroSection() {
           Context → Build → Secure → Assure
         </div>
         <h1 className="hero-headline">
-          We don&apos;t just build AI agents.
-          <br />
-          We engineer <span className="gradient">trust.</span>
+          AI should be a{' '}
+          <span className="gradient">transformative, healing force</span>
+          {' '}— equitable to all.
         </h1>
         <p className="hero-sub">
-          Context first. Secure by design. Assured at scale. AI powerful enough
-          to transform industries — and responsible enough to earn trust.
+          We engineer agents that are context-rich, secure by design, fair by
+          default, and continuously assured — so you can deploy AI with
+          confidence.
         </p>
         <div className="hero-ctas">
           <button

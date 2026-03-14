@@ -30,6 +30,11 @@ export const metadata: Metadata = {
   title: "Digixr Technologies — Empowering Businesses with AI Powered Innovation",
   description:
     "Digixr Technologies specializes in Agentic AI, ERP, and Next-gen App Services. Context. Build. Secure. Assure.",
+  alternates: {
+    types: {
+      'application/rss+xml': '/feed.xml',
+    },
+  },
 };
 
 export default function RootLayout({

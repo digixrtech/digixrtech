@@ -2,9 +2,13 @@
 
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { articles } from '@/lib/data/articles';
+import type { ArticleListItem } from '@/lib/data/articles';
 
-export function InsightsSection() {
+interface InsightsSectionProps {
+  articles: ArticleListItem[];
+}
+
+export function InsightsSection({ articles }: InsightsSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -35,14 +39,14 @@ export function InsightsSection() {
       </div>
 
       <div className="insights-grid">
-        {articles.slice(0, 3).map((article) => (
+        {articles.map((article) => (
           <article key={article.id} className="insight-card reveal">
             <span className="insight-category" data-cat={article.category}>
-              {article.categoryLabel}
+              {article.category_label}
             </span>
             <h3 className="insight-title">{article.title}</h3>
             <p className="insight-excerpt">{article.excerpt}</p>
-            <Link href="/insights" className="insight-read">
+            <Link href={`/insights/${article.slug}`} className="insight-read">
               Read <span>→</span>
             </Link>
           </article>

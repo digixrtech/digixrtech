@@ -1,16 +1,35 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export function Navbar() {
+  const pathname = usePathname();
+  const isHome = pathname === '/';
+
+  const sectionLink = (hash: string) => (isHome ? `#${hash}` : `/#${hash}`);
+
   const scrollToCta = () => {
-    document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth' });
+    if (isHome) {
+      document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.location.href = '/#cta';
+    }
   };
 
   return (
     <nav className="navbar" id="navbar">
-      <Link href="/" className="logo-wrap" style={{ textDecoration: 'none' }}>
+      <a
+        href="/"
+        className="logo-wrap"
+        style={{ textDecoration: 'none' }}
+        onClick={(e) => {
+          if (isHome) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        }}
+      >
         <Image
           src="/images/logo/logo-symbol-dark.png"
           alt="Digixr"
@@ -22,16 +41,16 @@ export function Navbar() {
           <div className="logo-text">DIGIXR</div>
           <div className="logo-sub">TECHNOLOGIES</div>
         </div>
-      </Link>
+      </a>
       <ul className="nav-links">
-        <li><a href="#services">Services</a></li>
-        <li><a href="#clients">Clients</a></li>
-        <li><a href="#blueprints">Blueprints</a></li>
-        <li><a href="#insights">Insights</a></li>
-        <li><a href="#purpose">Purpose</a></li>
+        <li><a href={sectionLink('services')}>Services</a></li>
+        <li><a href={sectionLink('clients')}>Clients</a></li>
+        <li><a href={sectionLink('blueprints')}>Blueprints</a></li>
+        <li><a href={sectionLink('insights')}>Insights</a></li>
+        <li><a href={sectionLink('purpose')}>Purpose</a></li>
         <li>
           <a
-            href="#cta"
+            href={sectionLink('cta')}
             className="nav-cta"
             onClick={(e) => {
               e.preventDefault();
