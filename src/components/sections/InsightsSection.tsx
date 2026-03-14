@@ -35,7 +35,7 @@ export function InsightsSection() {
       </div>
 
       <div className="insights-grid">
-        {articles.map((article) => (
+        {articles.slice(0, 3).map((article) => (
           <article key={article.id} className="insight-card reveal">
             <span className="insight-category" data-cat={article.category}>
               {article.categoryLabel}
