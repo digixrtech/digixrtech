@@ -7,6 +7,8 @@ import rehypeHighlight from 'rehype-highlight';
 import { getArticleBySlug, getAllArticleSlugs, getRelatedArticles, formatDate } from '@/lib/data/articles';
 import { JsonLd } from '@/components/JsonLd';
 
+export const revalidate = 60; // Re-fetch from DB every 60 seconds
+
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
