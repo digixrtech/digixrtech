@@ -27,13 +27,38 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Digixr Technologies — Empowering Businesses with AI Powered Innovation",
+  title: "Digixr — Agentic AI, Built Right and Equitable to All",
   description:
-    "Digixr Technologies specializes in Agentic AI, ERP, and Next-gen App Services. Context. Build. Secure. Assure.",
+    "We engineer production-grade AI agents through four lifecycle stages — Context, Build, Secure, Assure. Transformative AI with security and fairness built in, not bolted on.",
+  metadataBase: new URL("https://digixr.com"),
   alternates: {
     types: {
       'application/rss+xml': '/feed.xml',
     },
+  },
+  openGraph: {
+    title: "Digixr — Agentic AI, Built Right and Equitable to All",
+    description:
+      "We engineer production-grade AI agents through four lifecycle stages — Context, Build, Secure, Assure. Transformative AI with security and fairness built in, not bolted on.",
+    url: "https://digixr.com",
+    siteName: "Digixr Technologies",
+    images: [
+      {
+        url: "/images/og-home.png",
+        width: 1200,
+        height: 630,
+        alt: "Digixr Technologies — Agentic AI, Built Right and Equitable to All",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Digixr — Agentic AI, Built Right and Equitable to All",
+    description:
+      "Production-grade AI agents — Context, Build, Secure, Assure. Security and fairness built in, not bolted on.",
+    images: ["/images/og-home.png"],
   },
 };
 
