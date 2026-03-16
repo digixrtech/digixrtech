@@ -8,11 +8,11 @@ export const revalidate = 60; // Re-fetch from DB every 60 seconds
 export const metadata: Metadata = {
   title: 'Insights | Digixr Technologies',
   description: 'Perspectives on Agentic AI from the team building production-grade agents. Context Engineering, Agent Security, AI Assurance, and more.',
-  alternates: { canonical: 'https://digixr.com/insights' },
+  alternates: { canonical: 'https://www.digixrtech.com/insights' },
   openGraph: {
     title: 'Insights | Digixr Technologies',
     description: 'Perspectives on Agentic AI from the team building production-grade agents.',
-    url: 'https://digixr.com/insights',
+    url: 'https://www.digixrtech.com/insights',
     type: 'website',
     siteName: 'Digixr Technologies',
   },
@@ -26,11 +26,11 @@ export default async function InsightsPage() {
     '@type': 'CollectionPage',
     name: 'Digixr Insights',
     description: 'Perspectives on Agentic AI from the team building production-grade agents.',
-    url: 'https://digixr.com/insights',
+    url: 'https://www.digixrtech.com/insights',
     publisher: {
       '@type': 'Organization',
       name: 'Digixr Technologies',
-      url: 'https://digixr.com',
+      url: 'https://www.digixrtech.com',
     },
   };
 

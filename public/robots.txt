@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://digixr.com
+Host: https://www.digixrtech.com
 
 # Sitemaps
-Sitemap: https://digixr.com/sitemap.xml
+Sitemap: https://www.digixrtech.com/sitemap.xml

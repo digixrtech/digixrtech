@@ -1,6 +1,6 @@
 import { getArticles, formatDate } from '@/lib/data/articles';
 
-const SITE_URL = process.env.SITE_URL || 'https://digixr.com';
+const SITE_URL = process.env.SITE_URL || 'https://www.digixrtech.com';
 
 export async function GET() {
   const articles = await getArticles();

@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const title = article.meta_title || article.title;
   const description = article.meta_description || article.excerpt;
-  const url = `https://digixr.com/insights/${article.slug}`;
+  const url = `https://www.digixrtech.com/insights/${article.slug}`;
 
   return {
     title: `${title} | Digixr Insights`,
@@ -67,9 +67,9 @@ export default async function ArticlePage({ params }: PageProps) {
     publisher: {
       '@type': 'Organization',
       name: 'Digixr Technologies',
-      url: 'https://digixr.com',
+      url: 'https://www.digixrtech.com',
     },
-    mainEntityOfPage: `https://digixr.com/insights/${article.slug}`,
+    mainEntityOfPage: `https://www.digixrtech.com/insights/${article.slug}`,
   };
 
   return (

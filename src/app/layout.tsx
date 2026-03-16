@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   title: "Digixr — Agentic AI — Engineered Right, Equitable to All",
   description:
     "We engineer production-grade AI agents through four lifecycle stages — Context, Build, Secure, Assure. Transformative AI with security and fairness built in, not bolted on.",
-  metadataBase: new URL("https://digixr.com"),
+  metadataBase: new URL("https://www.digixrtech.com"),
   alternates: {
     types: {
       'application/rss+xml': '/feed.xml',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     title: "Digixr — Agentic AI — Engineered Right, Equitable to All",
     description:
       "We engineer production-grade AI agents through four lifecycle stages — Context, Build, Secure, Assure. Transformative AI with security and fairness built in, not bolted on.",
-    url: "https://digixr.com",
+    url: "https://www.digixrtech.com",
     siteName: "Digixr Technologies",
     images: [
       {

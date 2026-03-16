@@ -116,6 +116,11 @@ export function BlueprintsSection() {
     return () => cleanups.forEach(fn => fn());
   }, []);
 
+  // Trigger canvas resize when tab switches so the newly-visible canvas gets dimensions
+  useEffect(() => {
+    window.dispatchEvent(new Event('resize'));
+  }, [activeTab]);
+
   // Reveal animations
   useEffect(() => {
     const reveals = sectionRef.current?.querySelectorAll('.reveal');

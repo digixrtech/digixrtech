@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { getAllArticleSlugs } from '@/lib/data/articles';
 
-const SITE_URL = process.env.SITE_URL || 'https://digixr.com';
+const SITE_URL = process.env.SITE_URL || 'https://www.digixrtech.com';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const slugs = await getAllArticleSlugs();
