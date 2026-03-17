@@ -14,6 +14,15 @@
         "--access-token",
         "sbp_b5a00fdffb28cec63cea3dcce788021ed906e049"
       ]
+    },
+    "image-gen": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["./node_modules/mcp-image/dist/server-main.js"],
+      "env": {
+        "GEMINI_API_KEY": "${GEMINI_API_KEY}",
+        "IMAGE_OUTPUT_DIR": "./public/images/insights"
+      }
     }
   }
 }

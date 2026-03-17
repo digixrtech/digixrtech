@@ -3340,6 +3340,14 @@ body {
   margin: 0 0 20px;
 }
 
+.article-content img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin: 32px 0;
+  display: block;
+}
+
 .article-content ul,
 .article-content ol {
   margin: 0 0 20px;

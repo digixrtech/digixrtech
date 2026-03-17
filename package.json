@@ -27,6 +27,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "mcp-image": "^0.8.1",
     "playwright": "^1.58.2",
     "pngjs": "^7.0.0",
     "tailwindcss": "^4",

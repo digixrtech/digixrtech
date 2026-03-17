@@ -33,12 +33,20 @@ For other Digixr associates, ask the user for name and role — you will need to
 
 ## Phase 1: Topic & Intent Gathering
 
-Ask the user for:
-- **Topic** (required) — what the article is about
-- **Intent / storyline brief** (optional) — the angle, argument, or key message they want to convey
+### Step 1A: Ask the user (STOP and wait for response)
+
+If the user provided a topic in the slash command arguments, acknowledge it. Then ASK the user the following before doing any research:
+
+- **Intent / storyline brief** (optional) — what angle, argument, or key message do you want to convey? Any specific points you want covered?
+- **Target audience** (optional) — who should find this most valuable? (e.g., CTOs, senior engineers, AI teams starting out)
 - **Author** (optional) — defaults to Saravanakumar D
 
-Then immediately:
+**IMPORTANT: Do NOT proceed to Step 1B until the user has responded.** Do not web search, do not read files. Just ask and wait.
+
+### Step 1B: Research the landscape (after user responds)
+
+Once the user has provided their intent (or explicitly said to proceed without one):
+
 1. **Web search** the topic for latest developments, debates, contrarian views, and gaps in existing coverage (use WebSearch tool)
 2. **Check existing articles** — read `supabase/migrations/001_create_articles_schema.sql` to see what Digixr has already published on this or related topics
 3. **Present landscape findings** to the user:
@@ -127,7 +135,7 @@ Write the full article following the approved outline. Apply the Voice Guide and
 1. **Opening hook** — 2-3 sentences. Counterintuitive claim or "what everyone gets wrong." No fluff.
 2. **Body sections** — 3-5 sections with the approved memorable titles
 3. **Mermaid diagrams** — in ` ```mermaid ` fenced code blocks
-4. **Image briefs** — as `[IMAGE: detailed description]` inline where the image should appear
+4. **Image briefs** — as `[IMAGE: detailed description]` inline where the image should appear. These are placeholders that MUST be replaced with generated images in Step 4B.
 5. **In Production callouts** — as blockquotes: `> **In Production:** anecdote text`
 6. **The Elixir Take** — final section, always titled "The Elixir Take". This is a position, not a summary.
 7. **Word count** — 1500-2500 words
@@ -143,6 +151,72 @@ Before presenting the article, verify ALL of the following. If any check fails, 
 4. Would a senior engineer find this valuable, not obvious?
 5. Does the Elixir Take give a clear, defensible opinion someone could disagree with?
 6. Is the word count between 1500-2500?
+
+### Step 4B-1: Choose Image Theme (STOP — wait for user input)
+
+Before generating any images, present the following visual theme options and ask the user to pick one. The chosen theme will be applied consistently to ALL images in the article.
+
+```
+🎨 Choose a visual theme for this article's images:
+
+A) **Dark Tech / Blueprint**
+   Deep navy/black background, glowing cyan/teal circuit lines and geometry.
+   Feels: Engineering precision, agentic systems, technical depth.
+
+B) **Gradient Abstract**
+   Soft gradient washes (cyan → teal → emerald), flowing shapes, light particles.
+   Feels: Modern, optimistic, innovation-forward.
+
+C) **Minimal Isometric**
+   Clean white/light grey backgrounds, flat isometric 3D shapes in brand colors.
+   Feels: Clear, diagrammatic, enterprise-friendly.
+
+D) **Cinematic Macro**
+   Photorealistic close-ups: circuit boards, server racks, data flows rendered as light trails.
+   Feels: High-production, editorial, premium.
+
+E) **Human + Machine**
+   People working alongside glowing interfaces or AI systems, warm lighting.
+   Feels: Approachable, business audience, ROI-focused.
+
+Or describe your own theme.
+```
+
+**STOP and wait for the user to pick a theme before generating any images.**
+
+Record the chosen theme as `{ARTICLE_THEME}`. Every image prompt in Step 4B-2 must include the theme descriptor appended to the brief.
+
+---
+
+### Step 4B-2: Per-Image Generation Loop (mandatory, interactive)
+
+**Folder convention:** Each article's images live in their own subfolder: `public/images/insights/{article-slug}/`
+
+For each `[IMAGE: description]` in the article, run this loop — one image at a time, fully resolved before moving to the next:
+
+1. **Generate 2 variations** of the image:
+   - Use ToolSearch to find the image generation tool: query `"image-gen generate"`
+   - **Variation A:** The brief as written, with `{ARTICLE_THEME}` appended. Save to `public/images/insights/{slug}/{filename}-a.png`
+   - **Variation B:** A reframed interpretation of the same concept — different composition, perspective, or metaphor — with `{ARTICLE_THEME}` appended. Save to `public/images/insights/{slug}/{filename}-b.png`
+
+2. **STOP and present both variations to the user:**
+   ```
+   Image [N] of [total] — [brief summary of what this image illustrates]
+
+   **Variation A:** ![A](/images/insights/{slug}/{filename}-a.png)
+   **Variation B:** ![B](/images/insights/{slug}/{filename}-b.png)
+
+   Pick A or B, request changes, or describe a new direction.
+   ```
+
+3. **Wait for user input**, then:
+   - If user picks A or B → rename the chosen file to `{filename}.png`, delete the other, move to next image
+   - If user requests changes → regenerate both variations incorporating the feedback, re-present
+   - If user describes a new direction → regenerate with the new prompt, re-present
+
+4. After all images are selected, replace each `[IMAGE: ...]` placeholder in the article with the chosen image: `![descriptive alt text](/images/insights/{slug}/filename.png)`
+
+**IMPORTANT:** Do not output `[IMAGE: ...]` briefs in the final article. Process one image at a time — do not batch-generate all images upfront. If a generation call fails, report the error and retry once.
 
 ### Output Three Artifacts
 
@@ -215,5 +289,5 @@ Follow these rules for ALL article content:
 ## Notes
 
 - **Mermaid rendering:** If Mermaid is not yet supported on the article detail page, note this in the output. Diagrams will render as code blocks until `rehype-mermaid` is added.
-- **Image briefs:** `[IMAGE: ...]` markers indicate where a designer should create custom illustrations. They are not rendered as images — they are production instructions.
+- **Image briefs:** `[IMAGE: ...]` markers are temporary placeholders written during Phase 3 outline. They must be replaced with actual generated images in Step 4B — never left in the final article output.
 - **SQL escaping:** All single quotes in content must be doubled (`''`) for valid SQL. The existing seed data in `001_create_articles_schema.sql` shows this pattern.
