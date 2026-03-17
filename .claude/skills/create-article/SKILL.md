@@ -74,7 +74,7 @@ Generate **2-3 distinct storyline options**. Each option includes:
 3. [Memorable section name] — [one-line summary]
 4. [Memorable section name] — [one-line summary]
 5. (optional) [Memorable section name] — [one-line summary]
-**Elixir Take:** [The opinionated closing stance — 1-2 sentences]
+**Digixr Take:** [The opinionated closing stance — 1-2 sentences]
 **Suggested category:** [category key] / [category label]
 ```
 
@@ -82,7 +82,7 @@ Generate **2-3 distinct storyline options**. Each option includes:
 - Each option must take a genuinely different angle on the topic — not just reworded versions of the same idea
 - Hooks must be counterintuitive or challenge a common assumption
 - Section names must be memorable and encode the insight (not "Introduction", "Best Practices", "Conclusion")
-- The Elixir Take must be an actual opinion that someone could disagree with
+- The Digixr Take must be an actual opinion that someone could disagree with
 
 **User interaction loop:**
 - Present the options and ask the user to pick one, combine elements from multiple, tweak, or request entirely new options
@@ -116,7 +116,7 @@ Expand the frozen storyline into a **detailed section-by-section outline**. For 
 - At least 1 Mermaid diagram placement (flowchart, sequence, or architecture)
 - At least 1 `[IMAGE: ...]` brief for a conceptual illustration
 - At least 1 "In Production" callout with a real-world anecdote
-- 3-5 sections total (excluding opening hook and Elixir Take)
+- 3-5 sections total (excluding opening hook and Digixr Take)
 
 **User interaction loop:**
 - Present the detailed outline and ask the user to review
@@ -137,7 +137,7 @@ Write the full article following the approved outline. Apply the Voice Guide and
 3. **Mermaid diagrams** — in ` ```mermaid ` fenced code blocks
 4. **Image briefs** — as `[IMAGE: detailed description]` inline where the image should appear. These are placeholders that MUST be replaced with generated images in Step 4B.
 5. **In Production callouts** — as blockquotes: `> **In Production:** anecdote text`
-6. **The Elixir Take** — final section, always titled "The Elixir Take". This is a position, not a summary.
+6. **The Digixr Take** — final section, always titled "The Digixr Take". This is a position, not a summary.
 7. **Word count** — 1500-2500 words
 8. **Read time** — calculate as `ceil(wordCount / 250)`
 
@@ -149,7 +149,7 @@ Before presenting the article, verify ALL of the following. If any check fails, 
 2. Is there at least 1 Mermaid diagram and 1 image brief?
 3. Does every section teach something specific — not generic advice?
 4. Would a senior engineer find this valuable, not obvious?
-5. Does the Elixir Take give a clear, defensible opinion someone could disagree with?
+5. Does the Digixr Take give a clear, defensible opinion someone could disagree with?
 6. Is the word count between 1500-2500?
 
 ### Step 4B-1: Choose Image Theme (STOP — wait for user input)
@@ -268,7 +268,7 @@ Follow these rules for ALL article content:
 - **Punchy sentences.** Vary length. Use fragments for emphasis. Like this.
 - **Production reality.** At least one moment describing what actually breaks, fails, or surprises in production. War stories, not theory.
 - **Explain relationships, not jargon.** Don't drop acronyms without showing how they connect. The reader is smart but may not share your vocabulary.
-- **The Elixir Take.** Every article ends with "The Elixir Take" — Digixr's opinionated stance. Not a summary. A position.
+- **The Digixr Take.** Every article ends with "The Digixr Take" — Digixr's opinionated stance. Not a summary. A position.
 - **No fluff intros.** Never start with "In today's fast-paced world", "As AI continues to evolve", or "In the rapidly changing landscape of". Start with the interesting thing.
 - **Concrete over abstract.** "Your agent will hallucinate 12% more on multi-hop queries" beats "agents can sometimes produce inaccurate results".
 
@@ -281,8 +281,8 @@ Follow these rules for ALL article content:
 - **Missing the "so what".** Every section must answer: why should the reader change what they're doing tomorrow?
 - **Undifferentiated from ChatGPT output.** If removing the Digixr branding makes this indistinguishable from generic AI-generated content, rewrite.
 - **Jargon soup.** "Leverage RAG-augmented HITL pipelines for agentic orchestration" teaches nothing. Unpack it.
-- **Weak Elixir Take.** "AI is important and companies should invest in it" is not an opinion. "Build your evaluation framework before you build your agent" is an opinion.
-- **Summary conclusions.** "In this article we covered..." is lazy. The Elixir Take should push the reader's thinking forward, not recap what they just read.
+- **Weak Digixr Take.** "AI is important and companies should invest in it" is not an opinion. "Build your evaluation framework before you build your agent" is an opinion.
+- **Summary conclusions.** "In this article we covered..." is lazy. The Digixr Take should push the reader's thinking forward, not recap what they just read.
 
 ---
 
