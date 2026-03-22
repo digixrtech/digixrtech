@@ -14,7 +14,7 @@ The autonomous vehicle industry learned this lesson a decade ago. SAE J3016 gave
 
 The AI agent industry doesn't have that shared vocabulary yet. And the cost of getting it wrong cuts both ways. Over-autonomous agents create blast radius — the refund bot that approves $14,000 without authority, the scheduling system that cancels appointments without checking dependencies. Under-autonomous agents leave value on the table — the triage assistant that could handle 80% of intake autonomously but requires a nurse to approve every single field.
 
-[IMAGE: A calibration dial visual showing a spectrum from "Too Little Autonomy" (human bottleneck, missed value, approval fatigue) on one end to "Too Much Autonomy" (blast radius, compliance gaps, uncontrolled actions) on the other, with a "Calibrated" sweet spot in the center. The dial should feel like an engineering instrument, not a simple slider. Include small icons or labels for the consequences at each extreme.]
+![Autonomy calibration spectrum showing L1 through L5 levels, from Too Little Autonomy to Too Much Autonomy, with a Calibrated sweet spot in the center](/images/insights/the-art-of-agent-autonomy/autonomy-calibration-dial.png)
 
 ## Five Levels of Agent Autonomy
 
@@ -34,7 +34,7 @@ Why can't this be L2? Because clinical notes become part of the legal medical re
 
 **Human control: ~95%.** Stateless or basic multi-turn. Tools invoked per request. No autonomous planning or self-correction.
 
-[IMAGE: Architecture diagram for L1 Assistive level. Show: Human box (labeled "Initiates each request") connected by arrow labeled "prompt" to LLM box (labeled "Reason + Generate"), which outputs "result" to an OUTPUT box. The LLM has a downward arrow labeled "call" to a Tools/RAG box. Top-right corner label: "Human = driver". Bottom labels: "HITL — Human-in-the-loop" and a human control bar filled to ~95%. Clean, technical diagram style with clear hierarchy.]
+![L1 Assistive architecture — Human initiates each request, LLM reasons and generates, Tools and RAG support. Human is the driver with 95% control.](/images/insights/the-art-of-agent-autonomy/l1-assistive-architecture.png)
 
 ### L2: Supervised — Orchestrated Pipeline, Human Checkpoints
 
@@ -48,7 +48,7 @@ Why can't this be L3? Because triage misclassification kills people. An ESI-3 pa
 
 **Human control: ~70%.** Design patterns include prompt chaining, routing, parallelization, and orchestrator-worker architectures.
 
-[IMAGE: Architecture diagram for L2 Supervised level. Show: Orchestrator/Graph box at top (labeled "Predefined workflow — DAG"), with arrows flowing down to three sequential step boxes: Step 1 (LLM + Tool), Step 2 (LLM + Tool), Step 3 (LLM + Eval), leading to OUTPUT. A Checkpoint box (labeled "Human reviews") connects to Step 2 with dashed lines. Top-right corner label: "DAG = driver". Bottom labels: "HOTL — Human-on-the-loop" and a human control bar filled to ~70%. Same clean technical style.]
+![L2 Supervised architecture — Orchestrated DAG with LLM nodes and human checkpoint. DAG is the driver with 70% human control.](/images/insights/the-art-of-agent-autonomy/l2-supervised-architecture.png)
 
 ### L3: Autonomous — Human Sets the Goal, Agent Runs the Loop
 
@@ -64,7 +64,7 @@ Why does L3 work here when L2 wouldn't? Because the rules are well-defined — d
 
 > **In Production:** The 90%+ alert fatigue stat is real. Studies consistently show physicians dismiss the vast majority of medication alerts because most are clinically insignificant. An L3 autonomous system that blocks only truly dangerous interactions and stays silent on the rest actually *improves* safety compared to an L2 system that alerts on everything and gets ignored.
 
-[IMAGE: Architecture diagram for L3 Autonomous level. Show: Goal box (labeled "Human sets") with arrow into a dashed-border box labeled "AGENT LOOP (LLM-controlled)" containing three connected boxes in a cycle: Plan (Reason/Decide) → Act (Execute tools) → Observe (Evaluate results), with a "done?" decision point looping back to Plan or exiting to Result box. Outside the loop, Memory box and Guardrails box connect with dashed arrows. Top-right label: "LLM = driver". Bottom labels: "HOOTL — Supervisory" and human control bar at ~30%.]
+![L3 Autonomous architecture — Goal-driven agent loop with Plan, Act, Observe cycle. LLM is the driver with 30% human control.](/images/insights/the-art-of-agent-autonomy/l3-autonomous-architecture.png)
 
 ### L4: Collaborative — Human Sets the Mission, Agents Coordinate
 
@@ -82,7 +82,7 @@ Why can't this be L5? Because the system doesn't learn from outcomes to improve 
 
 > **In Production:** The 7-8% mortality increase per hour of sepsis treatment delay is why L4's "act first, physician overrides" model isn't reckless — it's medically necessary. An L3 system that recommends and waits for approval would be the dangerous choice here.
 
-[IMAGE: Architecture diagram for L4 Collaborative level. Show: Mission box at top (labeled "Human defines") with arrow to Coordinator Agent box (labeled "Delegates, routes, merges"). The Coordinator connects with bidirectional arrows to four agent boxes: Planner (Decomposes tasks), Executor (Code + API calls), Reviewer (QA + Feedback), and Specialist (On-demand). Below all agents, a Shared Memory / Protocol bar (labeled "MCP, A2A"). Bottom labels: "HOOTL — Delegatory" and human control bar at ~15%.]
+![L4 Collaborative architecture — Coordinated specialized agents with shared memory and protocol. Human defines mission with 15% control.](/images/insights/the-art-of-agent-autonomy/l4-collaborative-architecture.png)
 
 ### L5: Self-Improving — Agents That Learn and Evolve
 
@@ -98,7 +98,7 @@ But the research is real. [OpenAI published a cookbook](https://developers.opena
 
 Understanding L5 matters even if you're building L2-L3 today. The architectural decisions you make now — how you structure memory, how you capture outcomes, how you evaluate performance — determine whether your agents can evolve later or hit a ceiling.
 
-[IMAGE: Architecture diagram for L5 Self-Improving level. Show the L3 agent loop (Plan → Act → Observe) wrapped inside a larger "EVOLUTION LOOP" that adds: Self-Evaluate (analyze outcomes) → Learn (update models/strategies) → Adapt (modify tools/thresholds) feeding back into the inner agent loop. The outer loop represents the self-improving cycle that distinguishes L5 from L3. Bottom labels: "HOOTL — Evolutionary" and human control bar at ~5%. Include a small label noting "Frontier — limited production deployments in 2026".]
+![L5 Self-Improving architecture — Inner agent loop wrapped by outer evolution loop with self-evaluate, learn, and adapt stages. Frontier with 5% human control.](/images/insights/the-art-of-agent-autonomy/l5-self-improving-architecture.png)
 
 ## The Decision Framework: Choosing Your Starting Level
 
@@ -159,7 +159,7 @@ You don't pick a level and stay there forever. Autonomy evolves as trust is earn
 
 > **In Production:** A realistic evolution timeline: L1 to L2 can happen in weeks — you're adding workflow structure around an existing assistant. L2 to L3 takes months of validation — you're removing human checkpoints, which means you need proof they're not needed. L3 to L4 is a significant architecture change — you're moving from a single agent to multi-agent coordination. L5 is aspirational for most teams in 2026, but the architectural groundwork starts at L3.
 
-[IMAGE: An evolution roadmap showing L1 through L5 as a gated progression. Between each level, show a "gate" with the specific requirements to pass through — infrastructure needed, metrics thresholds, validation criteria. Not a simple arrow — show it as an earned journey where each gate has specific criteria. Include approximate timelines (weeks, months, architecture change, frontier). The visual should feel like an engineering maturity model, not a marketing funnel.]
+![Evolution roadmap showing L1 through L5 as a gated progression with infrastructure requirements and timelines at each gate](/images/insights/the-art-of-agent-autonomy/evolution-roadmap.png)
 
 ## The Autonomy Audit
 
