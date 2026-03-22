@@ -138,8 +138,10 @@ Write the full article following the approved outline. Apply the Voice Guide and
 4. **Image briefs** — as `[IMAGE: detailed description]` inline where the image should appear. These are placeholders that MUST be replaced with generated images in Step 4B.
 5. **In Production callouts** — as blockquotes: `> **In Production:** anecdote text`
 6. **The Digixr Take** — final section, always titled "The Digixr Take". This is a position, not a summary.
-7. **Word count** — 1500-2500 words
-8. **Read time** — calculate as `ceil(wordCount / 250)`
+7. **Key Takeaways** — 3-4 bold bullet points placed just before "The Digixr Take". Each bullet should encode a specific, actionable insight — not a vague summary. These serve as: (a) a preview for skimmers who scroll to the bottom first, (b) reinforcement for readers who read the full article.
+8. **Engagement closer** — After "The Digixr Take" closing line, add one question inviting the reader to share their experience. This drives comments on platforms like Medium and LinkedIn. Keep it specific to the article's topic, not generic.
+9. **Word count** — 1500-2500 words
+10. **Read time** — calculate as `ceil(wordCount / 250)`
 
 ### After Writing, Self-Check Against Quality Rubric
 
@@ -151,6 +153,8 @@ Before presenting the article, verify ALL of the following. If any check fails, 
 4. Would a senior engineer find this valuable, not obvious?
 5. Does the Digixr Take give a clear, defensible opinion someone could disagree with?
 6. Is the word count between 1500-2500?
+7. Does the Key Takeaways section have 3-4 specific, actionable bullets (not vague summaries)?
+8. Does the article end with an engagement question tied to the article's topic?
 
 ### Step 4B-1: Choose Image Theme (STOP — wait for user input)
 
@@ -196,6 +200,7 @@ For each `[IMAGE: description]` in the article, run this loop — one image at a
 
 1. **Generate 2 variations** of the image:
    - Use ToolSearch to find the image generation tool: query `"image-gen generate"`
+   - **Image specs:** Generate at minimum 1400px width (use `imageSize: "2K"`). All text in diagrams must be 16pt+ to remain readable when displayed at 700px (Medium's standard width). Use high-contrast colors — avoid light text on light backgrounds.
    - **Variation A:** The brief as written, with `{ARTICLE_THEME}` appended. Save to `public/images/insights/{slug}/{filename}-a.png`
    - **Variation B:** A reframed interpretation of the same concept — different composition, perspective, or metaphor — with `{ARTICLE_THEME}` appended. Save to `public/images/insights/{slug}/{filename}-b.png`
 
@@ -244,6 +249,26 @@ VALUES (
 
 Note: `published = false` and `published_at = null` — articles are created as drafts.
 
+### Step 4C: Trigger On-Demand Revalidation
+
+After the article is inserted into Supabase (and optionally published), trigger cache revalidation so the homepage and insights pages reflect the new article immediately. The site uses on-demand ISR — pages are statically cached until explicitly revalidated.
+
+**When to trigger:** After any INSERT or UPDATE to the `articles` table (including publishing a draft).
+
+**How to trigger:** Use the Bash tool to call the revalidation API:
+```bash
+curl -s -X POST https://www.digixrtech.com/api/revalidate \
+  -H "Content-Type: application/json" \
+  -H "x-revalidation-secret: $(grep REVALIDATION_SECRET .env.local | cut -d= -f2)" \
+  -d '{"record": {"slug": "the-article-slug-here"}}'
+```
+
+This revalidates: `/` (homepage insights section), `/insights` (listing page), `/sitemap.xml`, and `/insights/{slug}` (the specific article page).
+
+**Expected response:** `{"revalidated": true, "slug": "the-article-slug-here"}`
+
+If the revalidation fails (e.g., deployment in progress), inform the user and suggest retrying in a few minutes.
+
 **Artifact 3: SEO Summary**
 ```
 Slug:             the-article-slug
@@ -291,3 +316,16 @@ Follow these rules for ALL article content:
 - **Mermaid rendering:** If Mermaid is not yet supported on the article detail page, note this in the output. Diagrams will render as code blocks until `rehype-mermaid` is added.
 - **Image briefs:** `[IMAGE: ...]` markers are temporary placeholders written during Phase 3 outline. They must be replaced with actual generated images in Step 4B — never left in the final article output.
 - **SQL escaping:** All single quotes in content must be doubled (`''`) for valid SQL. The existing seed data in `001_create_articles_schema.sql` shows this pattern.
+
+---
+
+## Cross-Publishing Readiness
+
+When an article may be cross-posted to Medium or other platforms, ensure:
+
+1. **Images** — All diagrams must have text readable at 700px width (16pt+ font). Generate at 1400px+ for retina.
+2. **Mermaid diagrams** — Must have static PNG fallbacks (Mermaid won't render on Medium/LinkedIn).
+3. **Alt text** — Every image must have descriptive alt text for accessibility and SEO.
+4. **Cover image** — Generate a dedicated cover/hero image for the article.
+5. **Canonical URL** — When cross-posting, always set canonical to `https://www.digixrtech.com/insights/{slug}`.
+6. **Platform-specific tags** — Suggest 5 Medium tags in the SEO Summary artifact.

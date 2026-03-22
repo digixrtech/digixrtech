@@ -3,7 +3,7 @@ import { getArticles } from '@/lib/data/articles';
 import { JsonLd } from '@/components/JsonLd';
 import { InsightsClient } from './InsightsClient';
 
-export const revalidate = 60; // Re-fetch from DB every 60 seconds
+export const revalidate = false; // On-demand revalidation only (via /api/revalidate)
 
 export const metadata: Metadata = {
   title: 'Insights | Digixr Technologies',

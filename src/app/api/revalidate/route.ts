@@ -12,9 +12,9 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const slug = body?.record?.slug;
 
-    // Revalidate the listing page
+    // Revalidate the homepage (insights section), listing page, and sitemap
+    revalidatePath('/');
     revalidatePath('/insights');
-    // Revalidate the sitemap
     revalidatePath('/sitemap.xml');
 
     // Revalidate specific article page if slug is provided
