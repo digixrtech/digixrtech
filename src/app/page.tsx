@@ -7,6 +7,8 @@ import { InsightsSection } from '@/components/sections/InsightsSection';
 import { DiscoverySection } from '@/components/sections/DiscoverySection';
 import { getArticles } from '@/lib/data/articles';
 
+export const revalidate = 60; // Re-fetch articles every 60 seconds
+
 export default async function HomePage() {
   const articles = await getArticles();
 
