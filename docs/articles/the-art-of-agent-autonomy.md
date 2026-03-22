@@ -24,7 +24,9 @@ To make this concrete, we'll walk through all five levels using a single domain:
 
 ### L1: Assistive — Human Drives, AI Assists
 
-**Pattern:** Request → Response. No loop. The human initiates every interaction, the AI responds. Human is the driver.
+**Pattern:** Request → Response. The human sends a prompt, the LLM reasons over it and generates a response — optionally calling tools like RAG retrieval, APIs, or databases along the way. There is no autonomous loop. No planning across steps. No memory carried between interactions unless the human explicitly provides it. Every action begins with the human and ends with the human reviewing the output. The model responds but does not initiate, and it never self-corrects or retries on its own. This is the pattern behind most chatbots, copilots, and AI assistants in production today.
+
+![L1 Assistive architecture — Human initiates each request, LLM reasons and generates, Tools and RAG support. Human is the driver with 95% control.](/images/insights/the-art-of-agent-autonomy/l1-assistive-architecture.png)
 
 **Hospital example: Clinical Documentation AI.** The system listens to a doctor-patient conversation and drafts SOAP notes. The doctor reviews every word, edits, and signs.
 
@@ -34,11 +36,11 @@ Why can't this be L2? Because clinical notes become part of the legal medical re
 
 **Human control: ~95%.** Stateless or basic multi-turn. Tools invoked per request. No autonomous planning or self-correction.
 
-![L1 Assistive architecture — Human initiates each request, LLM reasons and generates, Tools and RAG support. Human is the driver with 95% control.](/images/insights/the-art-of-agent-autonomy/l1-assistive-architecture.png)
-
 ### L2: Supervised — Orchestrated Pipeline, Human Checkpoints
 
-**Pattern:** Orchestrated DAG with LLM nodes. The graph controls flow, the LLM handles reasoning within each node, and humans review at defined checkpoints. The DAG is the driver.
+**Pattern:** Orchestrated DAG with LLM nodes. The system is structured as a predefined directed acyclic graph — a workflow where each step is known in advance. At each node, an LLM handles the reasoning: interpreting inputs, calling tools, generating outputs. But the graph controls what happens next — which step follows which, where the workflow branches, and where it parallelizes. The LLM doesn't decide the flow; it executes within the flow. At designated checkpoints, a human reviews the output before the workflow proceeds. Common design patterns at this level include prompt chaining, routing, orchestrator-workers, and evaluator-optimizer loops. The DAG is the driver — not the LLM.
+
+![L2 Supervised architecture — Orchestrated DAG with LLM nodes and human checkpoint. DAG is the driver with 70% human control.](/images/insights/the-art-of-agent-autonomy/l2-supervised-architecture.png)
 
 **Hospital example: Patient Intake and Triage Routing.** The system collects symptoms via a kiosk, checks insurance eligibility, pulls medical history, pre-fills forms, assigns an initial ESI triage level, and routes to the right department. A triage nurse reviews the routing decision before the patient moves.
 
@@ -48,11 +50,11 @@ Why can't this be L3? Because triage misclassification kills people. An ESI-3 pa
 
 **Human control: ~70%.** Design patterns include prompt chaining, routing, parallelization, and orchestrator-worker architectures.
 
-![L2 Supervised architecture — Orchestrated DAG with LLM nodes and human checkpoint. DAG is the driver with 70% human control.](/images/insights/the-art-of-agent-autonomy/l2-supervised-architecture.png)
-
 ### L3: Autonomous — Human Sets the Goal, Agent Runs the Loop
 
-**Pattern:** Goal → Autonomous Reason-Act Loop. The LLM dynamically decides what to do next. It plans, selects tools, executes, observes results, and iterates until the goal is met. The LLM is the driver.
+**Pattern:** Goal → Autonomous Reason-Act Loop. The human provides a goal and a set of guardrails, then steps back. The LLM takes over — it reasons about what to do next (Plan), selects and executes tools (Act), evaluates the results (Observe), and decides whether to loop again or declare the goal met. There is no predefined graph dictating the steps. The LLM dynamically chooses which tools to call, in what order, and how to handle errors or unexpected results. It maintains persistent memory across steps, building context as it works. This is the ReAct and Plan-and-Execute pattern — the architecture behind most "autonomous agents" in production today. The LLM is the driver.
+
+![L3 Autonomous architecture — Goal-driven agent loop with Plan, Act, Observe cycle. LLM is the driver with 30% human control.](/images/insights/the-art-of-agent-autonomy/l3-autonomous-architecture.png)
 
 **Hospital example: Medication Interaction Checking and Alerts.** When a physician orders a medication, the system autonomously cross-references the patient's full medication list, allergies, lab results for kidney and liver function, weight, and genomic data if available. It doesn't just flag interactions — it blocks dangerous combinations outright, suggests alternatives with dosage adjustments, and only escalates genuinely ambiguous cases to a pharmacist.
 
@@ -64,11 +66,11 @@ Why does L3 work here when L2 wouldn't? Because the rules are well-defined — d
 
 > **In Production:** The 90%+ alert fatigue stat is real. Studies consistently show physicians dismiss the vast majority of medication alerts because most are clinically insignificant. An L3 autonomous system that blocks only truly dangerous interactions and stays silent on the rest actually *improves* safety compared to an L2 system that alerts on everything and gets ignored.
 
-![L3 Autonomous architecture — Goal-driven agent loop with Plan, Act, Observe cycle. LLM is the driver with 30% human control.](/images/insights/the-art-of-agent-autonomy/l3-autonomous-architecture.png)
-
 ### L4: Collaborative — Human Sets the Mission, Agents Coordinate
 
-**Pattern:** Coordinated Specialized Agents. Multiple agents collaborate — delegating, debating, dividing work — coordinated by a meta-agent or protocol. Each agent has its own tools, memory, and loop. The system exhibits emergent capabilities.
+**Pattern:** Coordinated Specialized Agents. Multiple agents — each with its own tools, memory, and reasoning loop — collaborate on a shared mission. A coordinator agent sits at the top, decomposing the mission into subtasks and delegating them to specialized agents: a planner that breaks down complex problems, an executor that calls APIs and runs code, a reviewer that validates quality, and on-demand specialists brought in as needed. The agents communicate through shared protocols like MCP and A2A, reading from and writing to shared or partitioned memory. The coordinator routes information, merges results, and resolves conflicts between agents. The system exhibits emergent capabilities — behaviors that arise from the collaboration that no single agent could produce alone.
+
+![L4 Collaborative architecture — Coordinated specialized agents with shared memory and protocol. Human defines mission with 15% control.](/images/insights/the-art-of-agent-autonomy/l4-collaborative-architecture.png)
 
 **Hospital example: Sepsis Detection and Response Coordination.** One agent monitors vitals continuously — heart rate variability, blood pressure trends, temperature patterns. Another watches lab results — lactate levels, white blood cell counts. A third tracks nursing notes for clinical observations like "patient seems confused." A coordinator agent synthesizes signals across all three streams. When sepsis probability crosses a threshold, the system autonomously initiates the sepsis bundle: orders blood cultures, starts IV fluids, pages the rapid response team, and alerts the attending physician.
 
@@ -82,11 +84,11 @@ Why can't this be L5? Because the system doesn't learn from outcomes to improve 
 
 > **In Production:** The 7-8% mortality increase per hour of sepsis treatment delay is why L4's "act first, physician overrides" model isn't reckless — it's medically necessary. An L3 system that recommends and waits for approval would be the dangerous choice here.
 
-![L4 Collaborative architecture — Coordinated specialized agents with shared memory and protocol. Human defines mission with 15% control.](/images/insights/the-art-of-agent-autonomy/l4-collaborative-architecture.png)
-
 ### L5: Self-Improving — Agents That Learn and Evolve
 
-**Pattern:** Self-evolving loop. The agent doesn't just execute — it modifies its own models, strategies, and toolsets based on outcomes. Meta-learning, experience distillation, autonomous retraining.
+**Pattern:** Self-evolving loop. The inner agent loop — plan, act, observe — is wrapped by an outer evolution loop that closes the feedback cycle from outcomes back to strategy. After completing tasks, the system self-evaluates: what worked, what failed, and why. It then learns from those outcomes — updating its own models, rewriting its prompts, adjusting thresholds, or adding new tools to its repertoire. Finally, it adapts — modifying its strategies and applying them to the next round of tasks. This isn't fine-tuning by a human. The agent is autonomously improving how it operates through meta-learning and experience distillation. The human sets boundaries and monitors for drift, but the agent handles everything else — including improving how it handles everything else.
+
+![L5 Self-Improving architecture — Inner agent loop wrapped by outer evolution loop with self-evaluate, learn, and adapt stages. Frontier with 5% human control.](/images/insights/the-art-of-agent-autonomy/l5-self-improving-architecture.png)
 
 **Hospital example: Hospital Operations Optimizer.** The system manages scheduling, bed allocation, and patient flow. Over time, it discovers that patients admitted through the ER on Monday nights have 15% longer stays than Tuesday admissions. It traces the pattern to understaffed radiology on Monday nights, which causes diagnostic delays that cascade into longer stays. It proposes schedule adjustments, tests them, measures the impact, and refines its strategies based on real outcomes.
 
@@ -97,8 +99,6 @@ But the research is real. [OpenAI published a cookbook](https://developers.opena
 **Human control: ~5%.** Sets boundaries, monitors drift, validates outcomes. The agent handles everything else — including improving how it handles everything else.
 
 Understanding L5 matters even if you're building L2-L3 today. The architectural decisions you make now — how you structure memory, how you capture outcomes, how you evaluate performance — determine whether your agents can evolve later or hit a ceiling.
-
-![L5 Self-Improving architecture — Inner agent loop wrapped by outer evolution loop with self-evaluate, learn, and adapt stages. Frontier with 5% human control.](/images/insights/the-art-of-agent-autonomy/l5-self-improving-architecture.png)
 
 ## The Decision Framework: Choosing Your Starting Level
 
