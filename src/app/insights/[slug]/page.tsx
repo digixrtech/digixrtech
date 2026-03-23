@@ -127,8 +127,7 @@ export default async function ArticlePage({ params }: PageProps) {
                   {r.category_label}
                 </span>
                 <h3>{r.title}</h3>
-                {r.subtitle && <p className="related-subtitle">{r.subtitle}</p>}
-                <p>{r.excerpt}</p>
+                <p className="related-subtitle">{r.subtitle ?? r.excerpt}</p>
                 <span className="article-read">Read <span>&rarr;</span></span>
               </Link>
             ))}

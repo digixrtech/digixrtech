@@ -2087,8 +2087,8 @@ body {
 .insight-subtitle {
   font-family: var(--font-body);
   font-size: 14px;
-  font-weight: 500;
-  color: #3BBFA6;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.55);
   line-height: 1.55;
   margin-bottom: 8px;
 }
@@ -3171,8 +3171,8 @@ body {
 .article-subtitle {
   font-family: var(--font-body);
   font-size: 14px;
-  font-weight: 500;
-  color: #3BBFA6;
+  font-weight: 400;
+  color: #64748B;
   line-height: 1.55;
   margin-bottom: 8px;
 }
@@ -3527,8 +3527,8 @@ body {
 .related-subtitle {
   font-family: var(--font-body);
   font-size: 13px;
-  font-weight: 500;
-  color: #3BBFA6;
+  font-weight: 400;
+  color: #64748B;
   line-height: 1.4;
   margin-bottom: 6px;
 }
