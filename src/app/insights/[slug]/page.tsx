@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!article) return { title: 'Article Not Found' };
 
   const title = article.meta_title || article.title;
-  const description = article.meta_description || article.excerpt;
+  const description = article.meta_description || article.subtitle || article.excerpt;
   const url = `https://www.digixrtech.com/insights/${article.slug}`;
 
   return {
@@ -59,7 +59,7 @@ export default async function ArticlePage({ params }: PageProps) {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: article.title,
-    description: article.excerpt,
+    description: article.subtitle || article.excerpt,
     datePublished: article.published_at,
     author: article.author_name
       ? { '@type': 'Person', name: article.author_name, jobTitle: article.author_role }
@@ -85,6 +85,9 @@ export default async function ArticlePage({ params }: PageProps) {
           {article.category_label}
         </span>
         <h1 className="article-hero-title">{article.title}</h1>
+        {article.subtitle && (
+          <p className="article-hero-subtitle">{article.subtitle}</p>
+        )}
         <div className="article-hero-meta">
           {article.author_name && <span className="article-author">{article.author_name}</span>}
           {article.published_at && <span>{formatDate(article.published_at)}</span>}
@@ -124,6 +127,7 @@ export default async function ArticlePage({ params }: PageProps) {
                   {r.category_label}
                 </span>
                 <h3>{r.title}</h3>
+                {r.subtitle && <p className="related-subtitle">{r.subtitle}</p>}
                 <p>{r.excerpt}</p>
                 <span className="article-read">Read <span>&rarr;</span></span>
               </Link>

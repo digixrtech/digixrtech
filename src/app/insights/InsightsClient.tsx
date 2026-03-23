@@ -68,10 +68,12 @@ export function InsightsClient({ articles }: InsightsClientProps) {
 
   const filtered = articles.filter((a) => {
     const matchesCategory = activeFilter === 'all' || a.category === activeFilter;
+    const q = searchQuery.toLowerCase();
     const matchesSearch =
       searchQuery === '' ||
-      a.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      a.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+      a.title.toLowerCase().includes(q) ||
+      (a.subtitle?.toLowerCase().includes(q) ?? false) ||
+      a.excerpt.toLowerCase().includes(q);
     return matchesCategory && matchesSearch;
   });
 
@@ -141,7 +143,7 @@ export function InsightsClient({ articles }: InsightsClientProps) {
               {article.category_label}
             </span>
             <h3 className="article-title">{article.title}</h3>
-            <p className="article-excerpt">{article.excerpt}</p>
+            <p className="article-subtitle">{article.subtitle ?? article.excerpt}</p>
             <div className="article-meta">
               <span>{formatDate(article.published_at)}</span>
               <span>{article.read_time} min read</span>

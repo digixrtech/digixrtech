@@ -45,7 +45,7 @@ export function InsightsSection({ articles }: InsightsSectionProps) {
               {article.category_label}
             </span>
             <h3 className="insight-title">{article.title}</h3>
-            <p className="insight-excerpt">{article.excerpt}</p>
+            <p className="insight-subtitle">{article.subtitle ?? article.excerpt}</p>
             <Link href={`/insights/${article.slug}`} className="insight-read">
               Read <span>→</span>
             </Link>

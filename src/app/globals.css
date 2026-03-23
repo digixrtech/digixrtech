@@ -2084,6 +2084,15 @@ body {
   line-height: 1.35;
 }
 
+.insight-subtitle {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: #3BBFA6;
+  line-height: 1.55;
+  margin-bottom: 8px;
+}
+
 .insight-excerpt {
   font-family: var(--font-body);
   font-size: 14px;
@@ -3159,6 +3168,15 @@ body {
   line-height: 1.35;
 }
 
+.article-subtitle {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: #3BBFA6;
+  line-height: 1.55;
+  margin-bottom: 8px;
+}
+
 .article-excerpt {
   font-family: var(--font-body);
   font-size: 14px;
@@ -3288,6 +3306,18 @@ body {
   color: #1a1a2e;
   line-height: 1.2;
   margin-bottom: 20px;
+}
+
+.article-hero-subtitle {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 400;
+  color: #718096;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .article-hero-meta {
@@ -3494,6 +3524,15 @@ body {
   line-height: 1.35;
 }
 
+.related-subtitle {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: #3BBFA6;
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+
 .related-card p {
   font-family: var(--font-body);
   font-size: 13px;
@@ -3516,6 +3555,10 @@ body {
 
   .article-hero-title {
     font-size: 28px;
+  }
+
+  .article-hero-subtitle {
+    font-size: 16px;
   }
 
   .article-hero-meta {

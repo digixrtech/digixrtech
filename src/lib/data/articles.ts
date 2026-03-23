@@ -6,6 +6,7 @@ export interface Article {
   id: string;
   slug: string;
   title: string;
+  subtitle: string | null;
   excerpt: string;
   content: string;
   category: ArticleCategory;
@@ -24,6 +25,7 @@ export interface ArticleListItem {
   id: string;
   slug: string;
   title: string;
+  subtitle: string | null;
   excerpt: string;
   category: ArticleCategory;
   category_label: string;
@@ -48,7 +50,7 @@ export const articleFilters: { key: ArticleCategory | 'all'; label: string }[] =
 export async function getArticles(category?: ArticleCategory): Promise<ArticleListItem[]> {
   let query = supabase
     .from('articles')
-    .select('id, slug, title, excerpt, category, category_label, published_at, read_time')
+    .select('id, slug, title, subtitle, excerpt, category, category_label, published_at, read_time')
     .eq('published', true)
     .order('published_at', { ascending: false });
 
@@ -70,7 +72,7 @@ export async function getArticles(category?: ArticleCategory): Promise<ArticleLi
 export async function getArticleBySlug(slug: string): Promise<Article | null> {
   const { data: articleData, error: articleError } = await supabase
     .from('articles')
-    .select('id, slug, title, excerpt, content, category, category_label, author_id, cover_image_url, published_at, read_time, meta_title, meta_description')
+    .select('id, slug, title, subtitle, excerpt, content, category, category_label, author_id, cover_image_url, published_at, read_time, meta_title, meta_description')
     .eq('slug', slug)
     .eq('published', true)
     .single();
@@ -102,6 +104,7 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
     id: articleData.id,
     slug: articleData.slug,
     title: articleData.title,
+    subtitle: articleData.subtitle ?? null,
     excerpt: articleData.excerpt,
     content: articleData.content,
     category: articleData.category as ArticleCategory,
@@ -142,6 +145,7 @@ export async function searchArticles(query: string): Promise<ArticleListItem[]> 
     id: row.id as string,
     slug: row.slug as string,
     title: row.title as string,
+    subtitle: (row.subtitle as string) ?? null,
     excerpt: row.excerpt as string,
     category: row.category as ArticleCategory,
     category_label: row.category_label as string,
@@ -154,7 +158,7 @@ export async function searchArticles(query: string): Promise<ArticleListItem[]> 
 export async function getRelatedArticles(slug: string, category: ArticleCategory, limit = 3): Promise<ArticleListItem[]> {
   const { data, error } = await supabase
     .from('articles')
-    .select('id, slug, title, excerpt, category, category_label, published_at, read_time')
+    .select('id, slug, title, subtitle, excerpt, category, category_label, published_at, read_time')
     .eq('published', true)
     .eq('category', category)
     .neq('slug', slug)

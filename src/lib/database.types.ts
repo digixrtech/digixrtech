@@ -34,6 +34,7 @@ export interface Database {
           id: string;
           slug: string;
           title: string;
+          subtitle: string | null;
           excerpt: string;
           content: string;
           category: ArticleCategory;
@@ -52,6 +53,7 @@ export interface Database {
           id?: string;
           slug: string;
           title: string;
+          subtitle?: string | null;
           excerpt: string;
           content: string;
           category: ArticleCategory;
@@ -70,6 +72,7 @@ export interface Database {
           id?: string;
           slug?: string;
           title?: string;
+          subtitle?: string | null;
           excerpt?: string;
           content?: string;
           category?: ArticleCategory;
